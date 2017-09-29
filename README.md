@@ -1,7 +1,6 @@
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+*This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).*
 
-Below you will find some information on how to perform common tasks.<br>
-You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
+*You will find some information on how to perform common tasks [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).*
 
 # elements-example
 
@@ -19,4 +18,4 @@ and run it using
 
 `yarn start`
 
-the app will be running on `http://localhost:3000/`
+the app will be running on `http://localhost:3000/
