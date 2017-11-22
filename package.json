@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "@allthings/colors": "^3.2.0",
-    "@allthings/elements": "^0.1.0",
+    "@allthings/elements": "^1.9.0",
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0"
