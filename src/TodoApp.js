@@ -77,18 +77,23 @@ class App extends Component {
     })
   }
 
+  addTodo = event => {
+    const text = document.getElementById('new').value
+    const newTodo = this.state.todos.slice()
+    const item = {
+      id: newTodo.length,
+      text,
+      done: false
+    }
+    newTodo.push(item)
+    this.setState({ todos: newTodo })
+    document.getElementById('new').value = ''
+  }
+
   handleKeyPress = event => {
     const text = event.target.value
     if (event.key === 'Enter' && text) {
-      const newTodo = this.state.todos.slice()
-      const item = {
-        id: newTodo.length,
-        text,
-        done: false
-      }
-      newTodo.push(item)
-      this.setState({ todos: newTodo })
-      document.getElementById('new').value = ''
+    	this.addTodo()
     }
   }
 
@@ -172,11 +177,11 @@ class App extends Component {
                   <div {...styles.textInput}>
                     <TextInput id="new" name="new" placeholder="Add new" onKeyPress={this.handleKeyPress} {...styles.textInput} />
                   </div>
-                  <Button{...styles.add}>add</Button>
+                  <Button onClick={this.addTodo} {...styles.add}>add</Button>
                 </div>
                 <div {...styles.buttonDiv}>
-                  <Button id="all" {...styles.button} backgroundColor={this.state.filter !== "all" ? opacity : ''} onClick={this.changeFilter}><span id="all">All</span></Button>
-                  <Button id="incomplete" onClick={this.changeFilter} backgroundColor={this.state.filter !== "incomplete" ? opacity : ''} {...styles.button} {...styles.button}><span id="incomplete">{incompleteNum}</span></Button>
+                  <Button id="all" onClick={this.changeFilter} backgroundColor={this.state.filter !== "all" ? opacity : ''} {...styles.button}><span id="all">All</span></Button>
+                  <Button id="incomplete" onClick={this.changeFilter} backgroundColor={this.state.filter !== "incomplete" ? opacity : ''} {...styles.button}><span id="incomplete">{incompleteNum}</span></Button>
                   <Button id="completed" onClick={this.changeFilter} backgroundColor={this.state.filter !== "completed" ? opacity : ''} {...styles.button}><span id="completed">Completed</span></Button>
                 </div>
                 <GroupedCardList>
