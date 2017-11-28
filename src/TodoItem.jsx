@@ -17,7 +17,9 @@ class TodoItem extends React.Component {
   }
 
   state = {
-    display: 'none',
+    display: 'inline',
+    touchStart: undefined,
+    slideLeft: -32
   }
 
   handleRemove = () => this.props.handleRemove(this.props.id)
@@ -42,13 +44,33 @@ class TodoItem extends React.Component {
     this.setState({ display: 'none' })
   }
 
+  handleTouchStart = event => {
+    const touchX = event.changedTouches[0].clientX
+    this.setState({ touchStart: touchX })
+  }
+
+  handleTouchMove = event => {
+    const touchObj = event.changedTouches[0].clientX
+    const dist = parseInt(touchObj) - this.state.touchStart
+    console.log(this.state.touchStart, touchObj, dist)
+    if (this.state.slideLeft < 0 && dist < -10) {
+      this.setState({ slideLeft: 0 })
+    } else if (dist > 5) {
+      this.setState({ slideLeft: -32 })
+    }
+  }
+
   render() {
     const styles = {
       list: css({
         display: 'inline-flex'
       }),
       icons: css({
-        width: '8%'
+        backgroundColor: 'black',
+        position: 'relative',
+        overflow: 'hidden',
+        height: '32.5px',
+        width: '32.5px'
       }),
       listItem: css({
         'minHeight': '50px',
@@ -64,29 +86,28 @@ class TodoItem extends React.Component {
       }),
       remove: css({
         display: this.state.display,
+        position: 'absolute',
         float: 'right',
         padding: '5px',
         margin: '3px',
+        right: this.state.slideLeft,
+        transition: 'all 400ms ease',
         ':hover': { cursor: 'pointer' }
       }),
       edit: css({
-        float: 'left',
-        padding: '5px',
-        margin: '3px',
-        ':hover': {
-          cursor: 'pointer'
-        }
+        padding: 0,
+        ':focus': { outline: 'none' }
       })
     }
     const { id, children, done, doubleClicked } = this.props
 
     return (
-      <div {...styles.list} onMouseOver={this.handleMouseOver} onMouseLeave={this.handleMouseLeave}>
+      <div {...styles.list}>
         <ListItem {...styles.listItem}>
           <div {...styles.task}>
             <Checkmark checked={this.props.done} onClick={this.handleCheckClick} {...styles.check} />
-            <div {...styles.text} onDoubleClick={this.handleDoubleClick}>
-              {doubleClicked ? <TextInput id={id} name="edit" defaultValue={children} placeholder="Edit todo" onKeyPress={this.handleEditComplete}/> : <Text autoBreak={true} id={id}>{children}</Text>}
+            <div {...styles.text} onDoubleClick={this.handleDoubleClick} onTouchStart={this.handleTouchStart} onTouchMove={this.handleTouchMove} onTouchEnd={this.handleTouchEnd} >
+              {doubleClicked ? <TextInput id={id} name="edit" defaultValue={children} placeholder="Edit todo" onKeyPress={this.handleEditComplete} {...styles.edit} /> : <Text autoBreak={true} id={id}>{children}</Text>}
             </div>
           </div>
         <div {...styles.icons}>
