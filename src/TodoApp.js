@@ -83,8 +83,10 @@ class App extends Component {
 			this.addTodo()
 		} else {
 			const textExists = document.getElementById('new').value
-			if (textExists) {
+			if (textExists && this.state.textValue) {
 				this.setState({ textValue: false })
+			} else if(!textExists && !this.state.textValue) {
+				this.setState({ textValue: true })
 			}
 		}
 	}
@@ -98,7 +100,10 @@ class App extends Component {
 			done: false
 		}
 		newTodo.push(item)
-		this.setState({ todos: newTodo })
+		this.setState({
+			todos: newTodo,
+			textValue: true
+		})
 		document.getElementById('new').value = ''
 		document.getElementById('new').blur()
 	}
@@ -183,7 +188,7 @@ class App extends Component {
 							<Card>
 								<div {...styles.new}> 
 									<div {...styles.textInput}>
-										<TextInput id="new" name="new" placeholder="Add new" onKeyPress={this.handleKeyPress} {...styles.textInput} />
+										<TextInput id="new" name="new" placeholder="Add new" onKeyUp={this.handleKeyPress} {...styles.textInput} />
 									</div>
 									<Button onClick={this.addTodo} disabled={this.state.textValue} {...styles.add}>add</Button>
 								</div>
