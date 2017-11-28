@@ -19,7 +19,7 @@ class TodoItem extends React.Component {
   state = {
     display: 'inline',
     touchStart: undefined,
-    slideLeft: -32
+    slideLeft: -70
   }
 
   handleRemove = () => this.props.handleRemove(this.props.id)
@@ -56,21 +56,18 @@ class TodoItem extends React.Component {
     if (this.state.slideLeft < 0 && dist < -10) {
       this.setState({ slideLeft: 0 })
     } else if (dist > 5) {
-      this.setState({ slideLeft: -32 })
+      this.setState({ slideLeft: -70 })
     }
   }
 
   render() {
     const styles = {
+      check: css({
+        height: '10px',
+        width: '30px'
+      }),
       list: css({
         display: 'inline-flex'
-      }),
-      icons: css({
-        backgroundColor: 'black',
-        position: 'relative',
-        overflow: 'hidden',
-        height: '32.5px',
-        width: '32.5px'
       }),
       listItem: css({
         'minHeight': '50px',
@@ -84,9 +81,25 @@ class TodoItem extends React.Component {
         padding: '10px 10px 15px 10px',
         width: '100%'
       }),
+      removeDiv: css({
+        backgroundColor: 'black',
+        position: 'relative',
+        overflow: 'hidden',
+        height: '50.5px',
+        width: '50.5px',
+        padding: '0px 10px 15px 10px'
+      }),
+      editDiv: css({
+        backgroundColor: 'gray',
+        position: 'relative',
+        overflow: 'hidden',
+        height: '50.5px',
+        width: '50.5px',
+        padding: '0px 10px 15px 10px'
+      }),
       remove: css({
         display: this.state.display,
-        position: 'absolute',
+        padding: '0px 10px 15px 10px',
         float: 'right',
         padding: '5px',
         margin: '3px',
@@ -94,7 +107,22 @@ class TodoItem extends React.Component {
         transition: 'all 400ms ease',
         ':hover': { cursor: 'pointer' }
       }),
-      edit: css({
+      iconBackground: css({
+        position: 'absolute',
+        padding: '15px',
+        float: 'right',
+        right: this.state.slideLeft,
+        transition: 'all 400ms ease',
+        height: '35.5px',
+        width: '40px'
+      }),
+      gray: css({
+        backgroundColor: 'gray'
+      }),
+      red: css({
+        backgroundColor: 'red'
+      }),
+      editField: css({
         padding: 0,
         ':focus': { outline: 'none' }
       })
@@ -107,12 +135,19 @@ class TodoItem extends React.Component {
           <div {...styles.task}>
             <Checkmark checked={this.props.done} onClick={this.handleCheckClick} {...styles.check} />
             <div {...styles.text} onDoubleClick={this.handleDoubleClick} onTouchStart={this.handleTouchStart} onTouchMove={this.handleTouchMove} onTouchEnd={this.handleTouchEnd} >
-              {doubleClicked ? <TextInput id={id} name="edit" defaultValue={children} placeholder="Edit todo" onKeyPress={this.handleEditComplete} {...styles.edit} /> : <Text autoBreak={true} id={id}>{children}</Text>}
+              {doubleClicked ? <TextInput id={id} name="edit" defaultValue={children} placeholder="Edit todo" onKeyPress={this.handleEditComplete} {...styles.editField} /> : <Text autoBreak={true} id={id}>{children}</Text>}
             </div>
           </div>
-        <div {...styles.icons}>
-          <Icon name="remove-light-filled" {...styles.remove} size="m" onClick={this.handleRemove} />
-        </div>
+          <div {...styles.editDiv}>
+            <div {...styles.iconBackground} {...styles.gray}>
+              <Icon name="edit" {...styles.remove} size="m" color="white" onClick={this.handleRemove} />
+            </div>
+          </div>
+          <div {...styles.removeDiv}>
+            <div {...styles.iconBackground} {...styles.red}>
+              <Icon name="remove-light-filled" {...styles.remove} size="m" color="white" onClick={this.handleRemove} />
+            </div>
+          </div>
         </ListItem>
       </div>
     )
