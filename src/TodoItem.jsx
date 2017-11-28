@@ -158,7 +158,7 @@ class TodoItem extends React.Component {
           <div {...styles.inline}>
             <div {...styles.editDiv}>
               <div {...styles.iconBackground} {...styles.gray}>
-                <Icon name="edit" {...styles.remove} size="m" color="white" onClick={this.handleRemove} />
+                <Icon name="edit" {...styles.remove} size="m" color="white" onClick={this.handleDoubleClick} />
               </div>
             </div>
             <div {...styles.removeDiv}>
