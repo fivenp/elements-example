@@ -33,7 +33,9 @@ class App extends Component {
       { id: 1, text: 'Create nice invitation cards', done: false, doubleClicked: false },
       { id: 2, text: 'Ask some people to bring some finger food', done: false, doubleClicked: false }
     ],
-    filter: 'all'
+    filter: 'all',
+    complete: 0,
+    incomplete: 0
   }
 
   handleRemove = id => {
@@ -141,7 +143,7 @@ class App extends Component {
                   <TextInput id="new" name="new" placeholder="Add new" onKeyPress={this.handleKeyPress} />
                 </div>
                 <div {...styles.buttonDiv}>
-                  <Button id="all" {...styles.button} onClick={this.changeFilter}><span id="all">All</span></Button>
+                  <Button id="all" {...styles.button} backgroundColor="rgba(232, 76, 61, 0.5)" onClick={this.changeFilter}><span id="all">All</span></Button>
                   <Button id="incomplete" onClick={this.changeFilter} backgroundColor="rgba(232, 76, 61, 0.5)" {...styles.button} {...styles.button}><span id="incomplete">Incomplete</span></Button>
                   <Button id="completed" onClick={this.changeFilter} backgroundColor="rgba(232, 76, 61, 0.5)" {...styles.button}><span id="completed">Completed</span></Button>
                 </div>
