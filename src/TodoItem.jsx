@@ -85,12 +85,13 @@ class TodoItem extends React.Component {
         display: 'inline-flex'
       }),
       listItem: css({
+        padding: 0,
         minHeight: '50px',
         width: '100%'
       }),
       task: css({
         display: 'inline-flex',
-        width: '92%',
+        width: '90%',
         height: '50.5px',
         padding: '10px 0'
       }),
@@ -103,14 +104,14 @@ class TodoItem extends React.Component {
         position: 'relative',
         overflow: 'hidden',
         height: '50.5px',
-        width: '50.5px',
+        width: '53.5px',
         padding: '0px 10px 15px 10px'
       }),
       editDiv: css({
         position: 'relative',
         overflow: 'hidden',
         height: '50.5px',
-        width: '50.5px',
+        width: '53.5px',
         padding: '0px 10px 15px 10px'
       }),
       remove: css({
