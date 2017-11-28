@@ -112,7 +112,8 @@ class App extends Component {
       }),
       new: css({
         padding: 0,
-        width: '100%'
+        width: '100%',
+        display: 'flex'
       }),
       iconStyle: css({
         display: 'inline-block',
@@ -132,7 +133,16 @@ class App extends Component {
       }),
       button: css({
         margin: '3px'
-      })
+      }),
+      textInput: css({
+        display: 'inline-block',
+        width: '100%'
+      }),
+  		add: css({
+        display: 'inline-block',
+        float: 'right',
+        margin: '15px 10px 15px 0px'
+  		})
     }
 
     const { todos } = this.state
@@ -159,7 +169,10 @@ class App extends Component {
               </TitleBar>
               <Card>
                 <div {...styles.new}> 
-                  <TextInput id="new" name="new" placeholder="Add new" onKeyPress={this.handleKeyPress} />
+                  <div {...styles.textInput}>
+                    <TextInput id="new" name="new" placeholder="Add new" onKeyPress={this.handleKeyPress} {...styles.textInput} />
+                  </div>
+                  <Button{...styles.add}>add</Button>
                 </div>
                 <div {...styles.buttonDiv}>
                   <Button id="all" {...styles.button} backgroundColor={this.state.filter !== "all" ? opacity : ''} onClick={this.changeFilter}><span id="all">All</span></Button>
