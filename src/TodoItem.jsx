@@ -24,31 +24,44 @@ class TodoItem extends React.Component {
     slideLeft: -70
   }
 
-  handleRemove = () => this.props.handleRemove(this.props.id)
+  handleRemove = () => {
+    this.closeIcons('')
+    this.props.handleRemove(this.props.id) 
+  }
 
   handleDoubleClick = () => this.props.onDoubleClick(this.props.id)
 
   handleEditComplete = event => this.props.doneEditting(event, this.props.id)
 
-  handleCheckClick = event => {
-    this.props.checkmarkClicked(this.props.id)
-  }
+  handleCheckClick = () => this.props.checkmarkClicked(this.props.id)
 
-  editTask = () => {
-    this.props.onDoubleClick(this.props.id)
-  }
+  editTask = () => this.props.onDoubleClick(this.props.id)
 
-  handleMouseOver = () => {
-    this.setState({ display: 'inline' })
-  }
+  handleMouseOver = () => this.setState({ display: 'inline' })
 
-  handleMouseLeave = () => {
-    this.setState({ display: 'none' })
-  }
+  handleMouseLeave = () => this.setState({ display: 'none' })
 
   handleTouchStart = event => {
     const touchX = event.changedTouches[0].clientX
     this.setState({ touchStart: touchX })
+  }
+
+  openIcons = () => {
+    document.getElementById(`checkmark${this.props.id}`).style.display = 'none'
+    this.setState({
+      slideLeft: 0,
+      icons: 150,
+      iconTransition: ''
+    })
+  }
+
+  closeIcons = (transition) => {
+    document.getElementById(`checkmark${this.props.id}`).style.display = 'flex'
+    this.setState({
+      slideLeft: -70,
+      icons: 0,
+      iconTransition: transition
+    })
   }
 
   handleTouchMove = event => {
@@ -56,35 +69,10 @@ class TodoItem extends React.Component {
     const dist = parseInt(touchObj) - this.state.touchStart
     console.log(this.state.touchStart, touchObj, dist)
     if (this.state.slideLeft < 0 && dist < -10) {
-      document.getElementById(`checkmark${this.props.id}`).style.display = 'none'
-      this.setState({
-        slideLeft: 0,
-        icons: 150,
-        iconTransition: ''
-      })
+      this.openIcons()
     } else if (dist > 5) {
-      document.getElementById(`checkmark${this.props.id}`).style.display = 'flex'
-      this.setState({
-        slideLeft: -70,
-        icons: 0,
-        iconTransition: '3000ms'
-      })
+      this.closeIcons('300ms')
     }
-  }
-
-  closeIcons = event => {
-    /*if (event.path[0].className == 'iconDiv' || event.path[1].className == 'iconDiv', event.path[2].className = 'iconDiv' || event.path[3].className == 'iconDiv' || event.path[4].className == 'iconDiv') {
-      console.log('iconDiv exists')
-    }
-
-    console.log('from todoimte', event.path[2].className)
-    console.log('from todoimte', event.path[2].div)
-    console.log('from todoimte', event.path)
-    */
-    console.log(document.getElementsByClassName('iconDiv'))
-    //document.getElementsByClassName('iconDiv')[0].style.display = 'none'
-    document.getElementById(`checkmark${this.props.id}`).style.display = 'flex'
-    
   }
 
   render() {
@@ -97,7 +85,7 @@ class TodoItem extends React.Component {
         overflow: 'hidden',
         display: 'inline-flex',
         width: this.state.icons,
-        'transition-delay': this.state.iconTransition
+        transitionDelay: this.state.iconTransition
       }),
       list: css({
         display: 'inline-flex'
@@ -164,14 +152,13 @@ class TodoItem extends React.Component {
       })
     }
     const { id, children, done, doubleClicked } = this.props
-    document.addEventListener('mouseup', this.closeIcons)
 
     return (
       <div {...styles.list}>
         <ListItem {...styles.listItem}>
           <div {...styles.task}>
             <Checkmark id={`checkmark${id}`} checked={this.props.done} onClick={this.handleCheckClick} {...styles.check} />
-            <div {...styles.text} onDoubleClick={this.handleDoubleClick} onTouchStart={this.handleTouchStart} onTouchMove={this.handleTouchMove} onTouchEnd={this.handleTouchEnd} >
+            <div {...styles.text} onDoubleClick={this.handleDoubleClick} onTouchStart={this.handleTouchStart} onTouchMove={this.handleTouchMove} >
               {doubleClicked ? <TextInput id={id} name="edit" defaultValue={children} placeholder="Edit todo" onKeyPress={this.handleEditComplete} {...styles.editField} /> : <Text autoBreak={true} id={id}>{children}</Text>}
             </div>
           </div>
