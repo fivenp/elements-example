@@ -67,9 +67,24 @@ class TodoItem extends React.Component {
       this.setState({
         slideLeft: -70,
         icons: 0,
-        iconTransition: 'all 200ms ease'
+        iconTransition: '3000ms'
       })
     }
+  }
+
+  closeIcons = event => {
+    /*if (event.path[0].className == 'iconDiv' || event.path[1].className == 'iconDiv', event.path[2].className = 'iconDiv' || event.path[3].className == 'iconDiv' || event.path[4].className == 'iconDiv') {
+      console.log('iconDiv exists')
+    }
+
+    console.log('from todoimte', event.path[2].className)
+    console.log('from todoimte', event.path[2].div)
+    console.log('from todoimte', event.path)
+    */
+    console.log(document.getElementsByClassName('iconDiv'))
+    //document.getElementsByClassName('iconDiv')[0].style.display = 'none'
+    document.getElementById(`checkmark${this.props.id}`).style.display = 'flex'
+    
   }
 
   render() {
@@ -82,7 +97,7 @@ class TodoItem extends React.Component {
         overflow: 'hidden',
         display: 'inline-flex',
         width: this.state.icons,
-        transition: this.state.iconTransition
+        'transition-delay': this.state.iconTransition
       }),
       list: css({
         display: 'inline-flex'
@@ -149,6 +164,7 @@ class TodoItem extends React.Component {
       })
     }
     const { id, children, done, doubleClicked } = this.props
+    document.addEventListener('mouseup', this.closeIcons)
 
     return (
       <div {...styles.list}>
