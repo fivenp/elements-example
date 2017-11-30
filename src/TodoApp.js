@@ -117,7 +117,24 @@ class App extends Component {
 		document.getElementById('new').focus()
 	}
 
+	finishEdit = event => {
+		const oldTodo = this.state.todos.slice()
+		const newTodo = oldTodo.map(todo => {
+			if (todo.doubleClicked && todo.id.toString() !== event.srcElement.id) {
+				todo.doubleClicked = false
+				return todo
+			} else if (todo.doubleClicked && todo.id.toString() === event.srcElement.id) {
+				return todo
+			} else {
+				return todo
+			}
+		})
+		this.setState({ todos: newTodo })
+	}
+
 	render() {
+		document.addEventListener('touchend', this.finishEdit)
+		document.addEventListener('mouseup', this.finishEdit)
 		console.log(this.state)
 		let styles = {
 			create: css({

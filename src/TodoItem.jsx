@@ -56,11 +56,13 @@ class TodoItem extends React.Component {
     const dist = parseInt(touchObj) - this.state.touchStart
     console.log(this.state.touchStart, touchObj, dist)
     if (this.state.slideLeft < 0 && dist < -10) {
+      document.getElementById(`checkmark${this.props.id}`).style.display = 'none'
       this.setState({
         slideLeft: 0,
         icons: 150
       })
     } else if (dist > 5) {
+      document.getElementById(`checkmark${this.props.id}`).style.display = 'flex'
       this.setState({
         slideLeft: -70,
         icons: 0,
@@ -151,7 +153,7 @@ class TodoItem extends React.Component {
       <div {...styles.list}>
         <ListItem {...styles.listItem}>
           <div {...styles.task}>
-            <Checkmark checked={this.props.done} onClick={this.handleCheckClick} {...styles.check} />
+            <Checkmark id={`checkmark${id}`} checked={this.props.done} onClick={this.handleCheckClick} {...styles.check} />
             <div {...styles.text} onDoubleClick={this.handleDoubleClick} onTouchStart={this.handleTouchStart} onTouchMove={this.handleTouchMove} onTouchEnd={this.handleTouchEnd} >
               {doubleClicked ? <TextInput id={id} name="edit" defaultValue={children} placeholder="Edit todo" onKeyPress={this.handleEditComplete} {...styles.editField} /> : <Text autoBreak={true} id={id}>{children}</Text>}
             </div>
