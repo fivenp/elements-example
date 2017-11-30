@@ -132,6 +132,7 @@ class App extends Component {
 		this.setState({ todos: newTodo })
 	}
 
+
 	render() {
 		document.addEventListener('touchend', this.finishEdit)
 		document.addEventListener('mouseup', this.finishEdit)

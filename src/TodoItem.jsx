@@ -59,14 +59,15 @@ class TodoItem extends React.Component {
       document.getElementById(`checkmark${this.props.id}`).style.display = 'none'
       this.setState({
         slideLeft: 0,
-        icons: 150
+        icons: 150,
+        iconTransition: ''
       })
     } else if (dist > 5) {
       document.getElementById(`checkmark${this.props.id}`).style.display = 'flex'
       this.setState({
         slideLeft: -70,
         icons: 0,
-        iconTransition: 'all 2000ms ease'
+        iconTransition: 'all 200ms ease'
       })
     }
   }
@@ -122,7 +123,7 @@ class TodoItem extends React.Component {
         padding: '5px',
         margin: '3px',
         right: this.state.slideLeft,
-        transition: 'all 3000ms ease',
+        transition: 'all 300ms ease',
         ':hover': { cursor: 'pointer' }
       }),
       iconBackground: css({
@@ -130,17 +131,17 @@ class TodoItem extends React.Component {
         padding: '15px',
         float: 'right',
         right: this.state.slideLeft,
-        transition: 'all 3000ms ease',
+        transition: 'all 300ms ease',
         height: '35.5px',
         width: '40px'
       }),
       gray: css({
         backgroundColor: 'gray',
-        transition: 'all 3000ms ease',
+        transition: 'all 300ms ease',
       }),
       red: css({
         backgroundColor: 'red',
-        transition: 'all 3000ms ease',
+        transition: 'all 300ms ease',
       }),
       editField: css({
         padding: 0,
@@ -158,7 +159,7 @@ class TodoItem extends React.Component {
               {doubleClicked ? <TextInput id={id} name="edit" defaultValue={children} placeholder="Edit todo" onKeyPress={this.handleEditComplete} {...styles.editField} /> : <Text autoBreak={true} id={id}>{children}</Text>}
             </div>
           </div>
-          <div {...styles.inline}>
+          <div className="iconDiv" {...styles.inline}>
             <div {...styles.editDiv}>
               <div {...styles.iconBackground} {...styles.gray}>
                 <Icon name="edit" {...styles.remove} size="m" color="white" onClick={this.handleDoubleClick} />
