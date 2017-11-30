@@ -122,6 +122,7 @@ class App extends Component {
 		const newTodo = oldTodo.map(todo => {
 			if (todo.doubleClicked && todo.id.toString() !== event.srcElement.id) {
 				todo.doubleClicked = false
+				todo.text = document.getElementById(todo.id).value
 				return todo
 			} else if (todo.doubleClicked && todo.id.toString() === event.srcElement.id) {
 				return todo
