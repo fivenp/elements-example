@@ -21,7 +21,8 @@ class TodoItem extends React.Component {
     icons: 0,
     iconTransition: '',
     slideLeft: -70,
-    checkmark: 'flex'
+    checkmark: 'flex',
+    iconOpen: false,
   }
 
   componentDidMount = () => {
@@ -65,7 +66,8 @@ class TodoItem extends React.Component {
       checkmark: 'none',
       slideLeft: 0,
       icons: 150,
-      iconTransition: ''
+      iconTransition: '',
+      iconOpen: true
     })
   }
 
@@ -74,7 +76,8 @@ class TodoItem extends React.Component {
       checkmark: 'flex',
       slideLeft: -70,
       icons: 0,
-      iconTransition: transition
+      iconTransition: transition || '',
+      iconOpen: false
     })
   }
 
@@ -102,9 +105,11 @@ class TodoItem extends React.Component {
 
   render() {
     const { id, children, done, doubleClicked } = this.props
-    const { icons, iconTransition, slideLeft, checkmark } = this.state
+    const { icons, iconTransition, slideLeft, checkmark, iconOpen } = this.state
 
-    const checkmarkYes = !doubleClicked ? 'flex' : checkmark
+
+    console.log('doubleClicked is', doubleClicked, 'iconopen is', iconOpen)
+    const checkmarkYes = (!iconOpen && !doubleClicked) ? 'flex' : (!doubleClicked ? 'flex' : checkmark )
     console.log('checkmark state', this.props.checkmarkDisplay)
 
     const styles = {

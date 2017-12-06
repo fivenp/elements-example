@@ -62,24 +62,16 @@ class App extends Component {
 			const newTodo = this.state.todos.slice()
 			newTodo[id].doubleClicked = false
 			newTodo[id].text = text
-			newTodo[id].checkmark = 'flex'
 
 			this.setState({ todos: newTodo })
 		}
 	}
 
 	checkmarkClicked = id => {
-		let newIncomplete = this.state.incomplete
 		const newTodo = this.state.todos.slice()
 		newTodo[id].done = !this.state.todos[id].done
-		if (!this.state.todos[id].done) {
-			newIncomplete++
-		} else {
-			newIncomplete--
-		}
 		this.setState({
-			todos: newTodo,
-			incomplete: newIncomplete
+			todos: newTodo
 		})
 	}
 
@@ -127,12 +119,12 @@ class App extends Component {
 
 	finishEdit = event => {
 		const oldTodo = this.state.todos.slice()
-		const newTodo = oldTodo.map(todo => {
-			if (todo.doubleClicked && todo.id.toString() !== event.srcElement.id) {
+		const newTodo = oldTodo.map((todo, index) => {
+			if (todo.doubleClicked && (index.toString() !== event.srcElement.id)) {
 				todo.doubleClicked = false
-				todo.text = document.getElementById(todo.id).value
+				todo.text = document.getElementById(index).value
 				return todo
-			} else if (todo.doubleClicked && todo.id.toString() === event.srcElement.id) {
+			} else if (todo.doubleClicked && (index.toString() === event.srcElement.id)) {
 				return todo
 			} else {
 				return todo
@@ -140,7 +132,6 @@ class App extends Component {
 		})
 		this.setState({ todos: newTodo })
 	}
-
 
 	render() {
 		console.log(this.state)
@@ -188,13 +179,13 @@ class App extends Component {
 		}
 
 		const { todos } = this.state
-		let incomplete = 0
-		//better to use reduce
-		todos.forEach(todo => {
-			if (todo.done === false) {
-				incomplete++
+
+		const incomplete = todos.reduce((accumulator, currentValue) => {
+			if (currentValue.done === false) {
+				accumulator++
 			}
-		})
+			return accumulator
+		}, 0)
 
 		const incompleteNum = incomplete > 0 ? `Incomplete (${incomplete})` : 'Incomplete'
 		const opacity = 'rgba(232, 76, 61, 0.5)'
@@ -232,7 +223,6 @@ class App extends Component {
 														handleRemove={this.handleRemove}
 														id={index}
 														done={todo.done}
-														doubleClicked={todo.doubleClicked}
 														checkmarkDisplay={todo.checkmark}
 														key={'checkbox' + index}
 														onDoubleClick={this.handleDoubleClick}
