@@ -29,12 +29,17 @@ const DemoTheme = {
 class App extends Component {
 	state = {
 		todos: [
-			{ id: 0, text: 'Search for cocktail recipes for the party', done: false, doubleClicked: false },
-			{ id: 1, text: 'Create nice invitation cards', done: false, doubleClicked: false },
-			{ id: 2, text: 'Ask some people to bring some finger food', done: false, doubleClicked: false }
+			{ id: 0, text: 'Search for cocktail recipes for the party', done: false, doubleClicked: false, checkmark: 'none' },
+			{ id: 1, text: 'Create nice invitation cards', done: false, doubleClicked: false, checkmark: 'flex' },
+			{ id: 2, text: 'Ask some people to bring some finger food', done: false, doubleClicked: false, checkmark: 'flex' }
 		],
 		filter: 'all',
 		textValue: true
+	}
+
+	componentDidMount = () => {
+		document.addEventListener('touchend', this.finishEdit)
+		document.addEventListener('mouseup', this.finishEdit)
 	}
 
 	handleRemove = id => {
@@ -57,6 +62,7 @@ class App extends Component {
 			const newTodo = this.state.todos.slice()
 			newTodo[id].doubleClicked = false
 			newTodo[id].text = text
+			newTodo[id].checkmark = 'flex'
 
 			this.setState({ todos: newTodo })
 		}
@@ -82,6 +88,7 @@ class App extends Component {
 		if (event.key === 'Enter' && text) {
 			this.addTodo()
 		} else {
+			//dont accessing dom; use 'ref'> put it in state
 			const textExists = document.getElementById('new').value
 			if (textExists && this.state.textValue) {
 				this.setState({ textValue: false })
@@ -104,6 +111,7 @@ class App extends Component {
 			todos: newTodo,
 			textValue: true
 		})
+		//dont set value
 		document.getElementById('new').value = ''
 		document.getElementById('new').blur()
 	}
@@ -135,10 +143,8 @@ class App extends Component {
 
 
 	render() {
-		document.addEventListener('touchend', this.finishEdit)
-		document.addEventListener('mouseup', this.finishEdit)
 		console.log(this.state)
-		let styles = {
+		const styles = {
 			create: css({
 				':hover': { cursor: 'pointer '}
 			}),
@@ -183,6 +189,7 @@ class App extends Component {
 
 		const { todos } = this.state
 		let incomplete = 0
+		//better to use reduce
 		todos.forEach(todo => {
 			if (todo.done === false) {
 				incomplete++
@@ -225,9 +232,10 @@ class App extends Component {
 														handleRemove={this.handleRemove}
 														id={index}
 														done={todo.done}
+														doubleClicked={todo.doubleClicked}
+														checkmarkDisplay={todo.checkmark}
 														key={'checkbox' + index}
 														onDoubleClick={this.handleDoubleClick}
-														doubleClicked={todo.doubleClicked}
 														doneEditting={this.doneEditting}
 														checkmarkClicked={this.checkmarkClicked}
 													>
@@ -242,6 +250,7 @@ class App extends Component {
 														handleRemove={this.handleRemove}
 														id={index}
 														done={todo.done}
+														checkmarkDisplay={todo.checkmark}
 														key={'checkbox' + index}
 														onDoubleClick={this.handleDoubleClick}
 														doubleClicked={todo.doubleClicked}
@@ -258,6 +267,7 @@ class App extends Component {
 													handleRemove={this.handleRemove}
 													id={index}
 													done={todo.done}
+													checkmarkDisplay={todo.checkmark}
 													key={'checkbox' + index}
 													onDoubleClick={this.handleDoubleClick}
 													doubleClicked={todo.doubleClicked}
