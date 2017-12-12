@@ -32,7 +32,7 @@ class App extends Component {
 			{ id: 2, text: 'Ask some people to bring some finger food', done: false, doubleClicked: false, checkmark: 'flex', iconOpen: false }
 		],
 		filter: 'all',
-		textValue: true
+		textDisable: true
 	}
 
 	componentDidMount = () => {
@@ -64,15 +64,15 @@ class App extends Component {
 
 	handleKeyPress = event => {
 		const text = event.target.value
-		if (event.key === 'Enter' && text) {
+		if ((event.key === 'Enter' || event.which == 13) && text) {
 			this.addTodo()
 		} else {
 			//dont access dom; use 'ref'> put it in state
 			const textExists = document.getElementById('new').value
-			if (textExists && this.state.textValue) {
-				this.setState({ textValue: false })
-			} else if(!textExists && !this.state.textValue) {
-				this.setState({ textValue: true })
+			if (textExists && this.state.textDisable) {
+				this.setState({ textDisable: false })
+			} else if(!textExists && !this.state.textDisable) {
+				this.setState({ textDisable: true })
 			}
 		}
 	}
@@ -83,12 +83,15 @@ class App extends Component {
 		const item = {
 			id: newTodo.length,
 			text,
-			done: false
+			done: false,
+			doubleClicked: false,
+			checkmark: 'flex',
+			iconOpen: false
 		}
 		newTodo.push(item)
 		this.setState({
 			todos: newTodo,
-			textValue: true
+			textDisable: true
 		})
 		//dont set value
 		document.getElementById('new').value = ''
@@ -106,7 +109,7 @@ class App extends Component {
 
 	doneEditting = (event, id) => {
 		const text = event.target.value
-		if (event.key === 'Enter' && text) {
+		if ((event.key === 'Enter' || event.which == 13) && text) {
 			const newTodo = this.state.todos.slice()
 			newTodo[id].doubleClicked = false
 			newTodo[id].text = text
@@ -208,7 +211,7 @@ class App extends Component {
 									<div {...styles.textInput}>
 										<TextInput id="new" name="new" placeholder="Add new" onKeyUp={this.handleKeyPress} {...styles.textInput} />
 									</div>
-									<Button onClick={this.addTodo} disabled={this.state.textValue} {...styles.add}>add</Button>
+									<Button onClick={this.addTodo} disabled={this.state.textDisable} {...styles.add}>add</Button>
 								</div>
 								<div {...styles.buttonDiv}>
 									<Button id="all" onClick={this.changeFilter} backgroundColor={this.state.filter !== "all" ? opacity : ''} {...styles.button}><span id="all">All</span></Button>
