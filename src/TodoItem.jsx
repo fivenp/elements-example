@@ -5,8 +5,6 @@ import ListItem from '@allthings/elements/molecules/List/ListItem'
 import TextInput from '@allthings/elements/molecules/TextInput'
 import Icon from '@allthings/elements/atoms/Icon'
 import Checkmark from '@allthings/elements/molecules/Checkmark'
-import ColorPalette from '@allthings/colors/lib/ColorPalette'
-import Button from '@allthings/elements/molecules/Button'
 import { css } from 'glamor'
 
 class TodoItem extends React.Component {
@@ -17,18 +15,13 @@ class TodoItem extends React.Component {
   }
 
   state = {
+    id: this.props.id,
     touchStart: undefined,
     icons: 0,
     iconTransition: '',
     slideLeft: -70,
-    checkmark: 'flex',
-    iconOpen: false,
-  }
-
-  componentDidMount = () => {
-    //document.addEventListener('touchstart', this.clickOutside)
-    //document.addEventListener('mousedown', this.clickOutside)
-    //this.setState({ checkmark: 'flex' })
+    checkmark: this.props.checkmarkDisplay || 'flex',
+    iconOpen: this.props.iconOpen || false,
   }
 
   handleRemove = () => {
@@ -36,25 +29,17 @@ class TodoItem extends React.Component {
     this.props.handleRemove(this.props.id) 
   }
 
-  handleDoubleClick = event => {
-    this.setState({
-      checkmark: 'none',
-      slideLeft: -70,
-      icons: 0,
-      iconTransition: ''
-    })
+  handleEdit = event => {
+    this.closeIcons('')
     this.props.onDoubleClick(this.props.id)
   }
 
-  handleEditComplete = event => this.props.doneEditting(event, this.props.id)
+  handleEditComplete = event => {
+    this.props.doneEditting(event, this.props.id)
+    this.closeIcons('')
+  }
 
   handleCheckClick = () => this.props.checkmarkClicked(this.props.id)
-
-  editTask = () => this.props.onDoubleClick(this.props.id)
-
-  handleMouseOver = () => this.setState({ display: 'inline' })
-
-  handleMouseLeave = () => this.setState({ display: 'none' })
 
   handleTouchStart = event => {
     const touchX = event.changedTouches[0].clientX
@@ -77,27 +62,18 @@ class TodoItem extends React.Component {
       slideLeft: -70,
       icons: 0,
       iconTransition: transition || '',
-      iconOpen: false
+      iconOpen: false,
+      doubleClicked: false,
     })
-  }
-
-  clickOutside = event => {
-    console.log('clicked yes', event)
-    console.log('heyyy', event.srcElement.id, 'yes', this.props.id.toString() )
-    if (event.srcElement.id !== this.props.id.toString()) {
-      this.closeIcons()
-    } else if (event.srcElement.id === this.props.id.toString()) {
-      console.log('same!')
-    }
   }
 
   handleTouchMove = event => {
     const { slideLeft, touchStart } = this.state
     const touchObj = event.changedTouches[0].clientX
-    const dist = parseInt(touchObj) - touchStart
-    console.log(touchStart, touchObj, dist)
+    const dist = parseInt(touchObj,) - touchStart
     if (slideLeft < 0 && dist < -10) {
       this.openIcons()
+      //this.setState({ iconOpen: true, checkmark: 'none' })
     } else if (dist > 5) {
       this.closeIcons('200ms')
     }
@@ -106,17 +82,13 @@ class TodoItem extends React.Component {
   render() {
     const { id, children, done, doubleClicked } = this.props
     const { icons, iconTransition, slideLeft, checkmark, iconOpen } = this.state
-
-
-    console.log('doubleClicked is', doubleClicked, 'iconopen is', iconOpen)
-    const checkmarkYes = (!iconOpen && !doubleClicked) ? 'flex' : (!doubleClicked ? 'flex' : checkmark )
-    console.log('checkmark state', this.props.checkmarkDisplay)
-
+    const checkmarkNo = (iconOpen || doubleClicked) ? 'none' : checkmark
     const styles = {
       check: css({
         height: '40px',
         width: '40px',
-        display: checkmarkYes
+        display: checkmarkNo + ' !important',
+        margin: '3px 0px'
       }),
       inline: css({
         overflow: 'hidden',
@@ -134,11 +106,10 @@ class TodoItem extends React.Component {
       task: css({
         display: 'inline-flex',
         width: '90%',
-        height: '50.5px',
         padding: '10px 0'
       }),
       text: css({
-        padding: '10px 10px 15px 10px',
+        paddingLeft: '10px',
         width: '100%',
         height: '50.5px'
       }),
@@ -157,7 +128,6 @@ class TodoItem extends React.Component {
         padding: '0px 10px 15px 10px'
       }),
       remove: css({
-        padding: '0px 10px 15px 10px',
         float: 'right',
         padding: '5px',
         margin: '3px',
@@ -185,6 +155,8 @@ class TodoItem extends React.Component {
       editField: css({
         padding: 0,
         ':focus': { outline: 'none' }
+      }),
+      staticText: css({
       })
     }
 
@@ -193,14 +165,14 @@ class TodoItem extends React.Component {
         <ListItem {...styles.listItem}>
           <div {...styles.task}>
             <Checkmark id={`checkmark${id}`} checked={done} onClick={this.handleCheckClick} {...styles.check} />
-            <div {...styles.text} onDoubleClick={this.handleDoubleClick} onTouchStart={this.handleTouchStart} onTouchMove={this.handleTouchMove} >
-              {doubleClicked ? <TextInput id={id} name="edit" defaultValue={children} placeholder="Edit todo" onKeyPress={this.handleEditComplete} {...styles.editField} /> : <Text autoBreak={true} id={id}>{children}</Text>}
+            <div {...styles.text} onDoubleClick={this.handleEdit} onTouchStart={this.handleTouchStart} onTouchMove={this.handleTouchMove} >
+              {doubleClicked ? <TextInput id={id} name="edit" defaultValue={children} placeholder="Edit todo" onKeyPress={this.handleEditComplete} {...styles.editField} /> : <Text autoBreak={true} id={id} {...styles.staticText}>{children}</Text>}
             </div>
           </div>
-          <div className="iconDiv" {...styles.inline}>
+          <div {...styles.inline}>
             <div {...styles.editDiv}>
-              <div {...styles.iconBackground} {...styles.gray}>
-                <Icon name="edit" {...styles.remove} size="m" color="white" onClick={this.handleDoubleClick} />
+              <div  {...styles.iconBackground} {...styles.gray}>
+                <Icon name="edit" {...styles.remove} size="m" color="white" onClick={this.handleEdit} />
               </div>
             </div>
             <div {...styles.removeDiv}>

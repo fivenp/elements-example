@@ -3,11 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "enzyme": "^3.2.0",
+    "jest-cli": "^21.2.1",
     "react-scripts": "1.0.14"
   },
   "dependencies": {
     "@allthings/colors": "^3.2.0",
     "@allthings/elements": "^1.9.0",
+    "jest": "^21.2.1",
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0"
@@ -15,7 +18,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "jest src/",
     "eject": "react-scripts eject"
   }
 }

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
 import { ColorPalette } from '@allthings/colors'
 import Card from '@allthings/elements/molecules/Card'
 import Inset from '@allthings/elements/atoms/Inset'
@@ -11,7 +10,6 @@ import ResourceProvider from '@allthings/elements/behaviour/ResourceProvider'
 import View from '@allthings/elements/atoms/View'
 import TextInput from '@allthings/elements/molecules/TextInput'
 import { css } from 'glamor'
-import CardList from '@allthings/elements/organisms/CardList/CardList'
 import Icon from '@allthings/elements/atoms/Icon'
 import GroupedCardList from '@allthings/elements/organisms/CardList/GroupedCardList'
 import Button from '@allthings/elements/molecules/Button'
@@ -29,9 +27,9 @@ const DemoTheme = {
 class App extends Component {
 	state = {
 		todos: [
-			{ id: 0, text: 'Search for cocktail recipes for the party', done: false, doubleClicked: false, checkmark: 'none' },
-			{ id: 1, text: 'Create nice invitation cards', done: false, doubleClicked: false, checkmark: 'flex' },
-			{ id: 2, text: 'Ask some people to bring some finger food', done: false, doubleClicked: false, checkmark: 'flex' }
+			{ id: 0, text: 'Search for cocktail recipes for the party', done: false, doubleClicked: false, checkmark: 'flex', iconOpen: false },
+			{ id: 1, text: 'Create nice invitation cards', done: false, doubleClicked: false, checkmark: 'flex', iconOpen: false },
+			{ id: 2, text: 'Ask some people to bring some finger food', done: false, doubleClicked: false, checkmark: 'flex', iconOpen: false }
 		],
 		filter: 'all',
 		textValue: true
@@ -56,17 +54,6 @@ class App extends Component {
 		this.setState({ todos: newTodo })
 	}
 
-	doneEditting = (event, id) => {
-		const text = event.target.value
-		if (event.key === 'Enter' && text) {
-			const newTodo = this.state.todos.slice()
-			newTodo[id].doubleClicked = false
-			newTodo[id].text = text
-
-			this.setState({ todos: newTodo })
-		}
-	}
-
 	checkmarkClicked = id => {
 		const newTodo = this.state.todos.slice()
 		newTodo[id].done = !this.state.todos[id].done
@@ -80,7 +67,7 @@ class App extends Component {
 		if (event.key === 'Enter' && text) {
 			this.addTodo()
 		} else {
-			//dont accessing dom; use 'ref'> put it in state
+			//dont access dom; use 'ref'> put it in state
 			const textExists = document.getElementById('new').value
 			if (textExists && this.state.textValue) {
 				this.setState({ textValue: false })
@@ -117,11 +104,26 @@ class App extends Component {
 		document.getElementById('new').focus()
 	}
 
+	doneEditting = (event, id) => {
+		const text = event.target.value
+		if (event.key === 'Enter' && text) {
+			const newTodo = this.state.todos.slice()
+			newTodo[id].doubleClicked = false
+			newTodo[id].text = text
+			newTodo[id].checkmark = 'flex'
+			newTodo[id].iconOpen = false
+
+			this.setState({ todos: newTodo })
+		}
+	}
+
 	finishEdit = event => {
 		const oldTodo = this.state.todos.slice()
 		const newTodo = oldTodo.map((todo, index) => {
 			if (todo.doubleClicked && (index.toString() !== event.srcElement.id)) {
 				todo.doubleClicked = false
+				todo.checkmark = 'flex'
+				todo.iconOpen = false
 				todo.text = document.getElementById(index).value
 				return todo
 			} else if (todo.doubleClicked && (index.toString() === event.srcElement.id)) {
@@ -134,7 +136,6 @@ class App extends Component {
 	}
 
 	render() {
-		console.log(this.state)
 		const styles = {
 			create: css({
 				':hover': { cursor: 'pointer '}
@@ -217,13 +218,15 @@ class App extends Component {
 								<GroupedCardList>
 									{this.state.todos.map((todo, index) => {
 										if (this.state.filter === "incomplete") {
-											if (todo.done == false) {
+											if (todo.done === false) {
 												return (
 													<TodoItem
 														handleRemove={this.handleRemove}
 														id={index}
 														done={todo.done}
 														checkmarkDisplay={todo.checkmark}
+														iconOpen={todo.iconOpen}
+														doubleClicked={todo.doubleClicked}
 														key={'checkbox' + index}
 														onDoubleClick={this.handleDoubleClick}
 														doneEditting={this.doneEditting}
@@ -234,16 +237,17 @@ class App extends Component {
 												)
 											}
 										} else if (this.state.filter === "completed") {
-											if (todo.done == true) {
+											if (todo.done === true) {
 												return (
 													<TodoItem
 														handleRemove={this.handleRemove}
 														id={index}
 														done={todo.done}
 														checkmarkDisplay={todo.checkmark}
+														iconOpen={todo.iconOpen}
+														doubleClicked={todo.doubleClicked}
 														key={'checkbox' + index}
 														onDoubleClick={this.handleDoubleClick}
-														doubleClicked={todo.doubleClicked}
 														doneEditting={this.doneEditting}
 														checkmarkClicked={this.checkmarkClicked}
 													>
@@ -258,9 +262,10 @@ class App extends Component {
 													id={index}
 													done={todo.done}
 													checkmarkDisplay={todo.checkmark}
+													iconOpen={todo.iconOpen}
+													doubleClicked={todo.doubleClicked}
 													key={'checkbox' + index}
 													onDoubleClick={this.handleDoubleClick}
-													doubleClicked={todo.doubleClicked}
 													doneEditting={this.doneEditting}
 													checkmarkClicked={this.checkmarkClicked}
 												>
