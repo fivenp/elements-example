@@ -15,13 +15,11 @@ class TodoItem extends React.Component {
   }
 
   state = {
-    id: this.props.id,
     touchStart: undefined,
     icons: 0,
     iconTransition: '',
     slideLeft: -70,
     checkmark: this.props.checkmarkDisplay || 'flex',
-    iconOpen: this.props.iconOpen || false,
   }
 
   handleRemove = () => {
@@ -51,8 +49,7 @@ class TodoItem extends React.Component {
       checkmark: 'none',
       slideLeft: 0,
       icons: 150,
-      iconTransition: '',
-      iconOpen: true
+      iconTransition: ''
     })
   }
 
@@ -62,7 +59,6 @@ class TodoItem extends React.Component {
       slideLeft: -70,
       icons: 0,
       iconTransition: transition || '',
-      iconOpen: false,
       doubleClicked: false,
     })
   }
@@ -73,16 +69,20 @@ class TodoItem extends React.Component {
     const dist = parseInt(touchObj,) - touchStart
     if (slideLeft < 0 && dist < -10) {
       this.openIcons()
-      //this.setState({ iconOpen: true, checkmark: 'none' })
+      this.props.onSlideLeft(this.props.id)
     } else if (dist > 5) {
       this.closeIcons('200ms')
     }
+    console.log('after opening', this.state)
   }
 
   render() {
-    const { id, children, done, doubleClicked } = this.props
-    const { icons, iconTransition, slideLeft, checkmark, iconOpen } = this.state
+    const { id, children, done, doubleClicked, iconOpen } = this.props
+    const { icons, iconTransition, slideLeft, checkmark } = this.state
+    //console.log('index', id, 'this state is', this.state, 'props are', this.props)
     const checkmarkNo = (iconOpen || doubleClicked) ? 'none' : checkmark
+    //const iconsNo = (iconOpen || doubleClicked) ? '150' :((!iconOpen && !doubleClicked) ? '0' : icons)
+    //const slideLeftNo = (iconOpen || doubleClicked) ? '0' :((!iconOpen && !doubleClicked) ? '-70' : slideLeft)
     const styles = {
       check: css({
         height: '40px',

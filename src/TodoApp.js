@@ -50,7 +50,12 @@ class App extends Component {
 	handleDoubleClick = id => {
 		const newTodo = this.state.todos.slice()
 		newTodo[id].doubleClicked = true
+		this.setState({ todos: newTodo })
+	}
 
+	handleSliding = id => {
+		const newTodo = this.state.todos.slice()
+		newTodo[id].iconOpen = true
 		this.setState({ todos: newTodo })
 	}
 
@@ -121,13 +126,21 @@ class App extends Component {
 	}
 
 	finishEdit = event => {
+		console.log('finish edit triggered', this.state.todos)
 		const oldTodo = this.state.todos.slice()
 		const newTodo = oldTodo.map((todo, index) => {
+			console.log('mapping', index, todo)
 			if (todo.doubleClicked && (index.toString() !== event.srcElement.id)) {
 				todo.doubleClicked = false
 				todo.checkmark = 'flex'
 				todo.iconOpen = false
 				todo.text = document.getElementById(index).value
+				return todo
+			} else if (todo.iconOpen && (index.toString() !== event.srcElement.id)) {
+				console.log('kajsdkfkajdfskj')
+				todo.doubleClicked = false
+				todo.checkmark = 'flex'
+				todo.iconOpen = false
 				return todo
 			} else if (todo.doubleClicked && (index.toString() === event.srcElement.id)) {
 				return todo
@@ -232,6 +245,7 @@ class App extends Component {
 														doubleClicked={todo.doubleClicked}
 														key={'checkbox' + index}
 														onDoubleClick={this.handleDoubleClick}
+														onSlideLeft={this.handleSliding}
 														doneEditting={this.doneEditting}
 														checkmarkClicked={this.checkmarkClicked}
 													>
@@ -251,6 +265,7 @@ class App extends Component {
 														doubleClicked={todo.doubleClicked}
 														key={'checkbox' + index}
 														onDoubleClick={this.handleDoubleClick}
+														onSlideLeft={this.handleSliding}
 														doneEditting={this.doneEditting}
 														checkmarkClicked={this.checkmarkClicked}
 													>
@@ -269,6 +284,7 @@ class App extends Component {
 													doubleClicked={todo.doubleClicked}
 													key={'checkbox' + index}
 													onDoubleClick={this.handleDoubleClick}
+													onSlideLeft={this.handleSliding}
 													doneEditting={this.doneEditting}
 													checkmarkClicked={this.checkmarkClicked}
 												>
