@@ -69,9 +69,10 @@ class TodoItem extends React.Component {
     const dist = parseInt(touchObj,) - touchStart
     if (slideLeft < 0 && dist < -10) {
       this.openIcons()
-      this.props.onSlideLeft(this.props.id)
+      this.props.onSlideLeft(this.props.id, 'open')
     } else if (dist > 5) {
       this.closeIcons('200ms')
+      this.props.onSlideLeft(this.props.id, 'close')
     }
     console.log('after opening', this.state)
   }
@@ -109,9 +110,10 @@ class TodoItem extends React.Component {
         padding: '10px 0'
       }),
       text: css({
-        paddingLeft: '10px',
+        margin: '0px 10px',
         width: '100%',
-        height: '50.5px'
+        height: '50.5px',
+        display: 'table'
       }),
       removeDiv: css({
         position: 'relative',
@@ -157,6 +159,8 @@ class TodoItem extends React.Component {
         ':focus': { outline: 'none' }
       }),
       staticText: css({
+        display: 'table-cell !important',
+        verticalAlign: 'middle'
       })
     }
 

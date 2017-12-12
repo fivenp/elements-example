@@ -53,9 +53,13 @@ class App extends Component {
 		this.setState({ todos: newTodo })
 	}
 
-	handleSliding = id => {
+	handleSliding = (id, type) => {
 		const newTodo = this.state.todos.slice()
-		newTodo[id].iconOpen = true
+		if (type === 'open') {
+			newTodo[id].iconOpen = true
+		} else if (type === 'close') {
+			newTodo[id].iconOpen = false
+		}
 		this.setState({ todos: newTodo })
 	}
 
