@@ -64,6 +64,7 @@ class TodoItem extends React.Component {
   }
 
   handleTouchMove = event => {
+    event.preventDefault()
     const { slideLeft, touchStart } = this.state
     const touchObj = event.changedTouches[0].clientX
     const dist = parseInt(touchObj,) - touchStart
