@@ -109,7 +109,7 @@ class App extends Component {
 
 	doneEditting = (event, id) => {
 		const text = event.target.value
-		if ((event.key === 'Enter' || event.which == 13) && text) {
+		if ((event.key === 'Enter' || (event.which == 13 || event.keyCode == 13)) && text) {
 			const newTodo = this.state.todos.slice()
 			newTodo[id].doubleClicked = false
 			newTodo[id].text = text
