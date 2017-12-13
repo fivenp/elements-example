@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
 import { ColorPalette } from '@allthings/colors'
-import Card from '@allthings/elements/molecules/Card'
+import Icon from '@allthings/elements/atoms/Icon'
 import Inset from '@allthings/elements/atoms/Inset'
-import TitleBar from '@allthings/elements/organisms/TitleBar'
 import Text from '@allthings/elements/atoms/Text'
+import View from '@allthings/elements/atoms/View'
+import Button from '@allthings/elements/molecules/Button'
+import Card from '@allthings/elements/molecules/Card'
+import TextInput from '@allthings/elements/molecules/TextInput'
+import GroupedCardList from '@allthings/elements/organisms/CardList/GroupedCardList'
+import TitleBar from '@allthings/elements/organisms/TitleBar'
+import ResourceProvider from '@allthings/elements/behaviour/ResourceProvider'
 import ThemeProvider from '@allthings/elements/behaviour/ThemeProvider'
 import TodoItem from './TodoItem'
-import ResourceProvider from '@allthings/elements/behaviour/ResourceProvider'
-import View from '@allthings/elements/atoms/View'
-import TextInput from '@allthings/elements/molecules/TextInput'
 import { css } from 'glamor'
-import Icon from '@allthings/elements/atoms/Icon'
-import GroupedCardList from '@allthings/elements/organisms/CardList/GroupedCardList'
-import Button from '@allthings/elements/molecules/Button'
 
 const DemoTheme = {
 	primary: ColorPalette.red,
@@ -108,8 +108,8 @@ class App extends Component {
 	}
 
 	changeFilter = event => {
-		const id = event.target.id
-		this.setState({ filter: id })
+		const className = event.target.className
+		this.setState({ filter: className })
 	}
 
 	focusInput = event => {
@@ -118,7 +118,7 @@ class App extends Component {
 
 	doneEditting = (event, id) => {
 		const text = event.target.value
-		if ((event.key === 'Enter' || (event.which == 13 || event.keyCode == 13)) && text) {
+		if (event.key === 'Enter' && text) {
 			const newTodo = this.state.todos.slice()
 			newTodo[id].doubleClicked = false
 			newTodo[id].text = text
@@ -133,20 +133,19 @@ class App extends Component {
 		console.log('finish edit triggered', this.state.todos)
 		const oldTodo = this.state.todos.slice()
 		const newTodo = oldTodo.map((todo, index) => {
-			console.log('mapping', index, todo)
-			if (todo.doubleClicked && (index.toString() !== event.srcElement.id)) {
+			const { doubleClicked, iconOpen } = todo
+			if (doubleClicked && (index.toString() !== event.srcElement.id)) {
 				todo.doubleClicked = false
 				todo.checkmark = 'flex'
 				todo.iconOpen = false
 				todo.text = document.getElementById(index).value
 				return todo
-			} else if (todo.iconOpen && (index.toString() !== event.srcElement.id)) {
-				console.log('kajsdkfkajdfskj')
+			} else if (iconOpen && (index.toString() !== event.srcElement.id)) {
 				todo.doubleClicked = false
 				todo.checkmark = 'flex'
 				todo.iconOpen = false
 				return todo
-			} else if (todo.doubleClicked && (index.toString() === event.srcElement.id)) {
+			} else if (doubleClicked && (index.toString() === event.srcElement.id)) {
 				return todo
 			} else {
 				return todo
@@ -161,7 +160,7 @@ class App extends Component {
 				':hover': { cursor: 'pointer '}
 			}),
 			inset: css({
-				width: '95%'
+				width: '93%'
 			}),
 			new: css({
 				padding: 0,
@@ -199,7 +198,7 @@ class App extends Component {
 			})
 		}
 
-		const { todos } = this.state
+		const { todos, filter, textDisable } = this.state
 
 		const incomplete = todos.reduce((accumulator, currentValue) => {
 			if (currentValue.done === false) {
@@ -228,73 +227,39 @@ class App extends Component {
 									<div {...styles.textInput}>
 										<TextInput id="new" name="new" placeholder="Add new" onKeyUp={this.handleKeyPress} {...styles.textInput} />
 									</div>
-									<Button onClick={this.addTodo} disabled={this.state.textDisable} {...styles.add}>add</Button>
+									<Button onClick={this.addTodo} disabled={textDisable} {...styles.add}>add</Button>
 								</div>
 								<div {...styles.buttonDiv}>
-									<Button id="all" onClick={this.changeFilter} backgroundColor={this.state.filter !== "all" ? opacity : ''} {...styles.button}><span id="all">All</span></Button>
-									<Button id="incomplete" onClick={this.changeFilter} backgroundColor={this.state.filter !== "incomplete" ? opacity : ''} {...styles.button}><span id="incomplete">{incompleteNum}</span></Button>
-									<Button id="completed" onClick={this.changeFilter} backgroundColor={this.state.filter !== "completed" ? opacity : ''} {...styles.button}><span id="completed">Completed</span></Button>
+									<Button className="all" id="all-button" onClick={this.changeFilter} backgroundColor={filter !== "all" ? opacity : ''} {...styles.button}><span className="all">All</span></Button>
+									<Button className="incomplete" onClick={this.changeFilter} backgroundColor={filter !== "incomplete" ? opacity : ''} {...styles.button}><span className="incomplete">{incompleteNum}</span></Button>
+									<Button className="completed" onClick={this.changeFilter} backgroundColor={filter !== "completed" ? opacity : ''} {...styles.button}><span className="completed">Completed</span></Button>
 								</div>
 								<GroupedCardList>
-									{this.state.todos.map((todo, index) => {
-										if (this.state.filter === "incomplete") {
-											if (todo.done === false) {
-												return (
-													<TodoItem
-														handleRemove={this.handleRemove}
-														id={index}
-														done={todo.done}
-														checkmarkDisplay={todo.checkmark}
-														iconOpen={todo.iconOpen}
-														doubleClicked={todo.doubleClicked}
-														key={'checkbox' + index}
-														onDoubleClick={this.handleDoubleClick}
-														onSlideLeft={this.handleSliding}
-														doneEditting={this.doneEditting}
-														checkmarkClicked={this.checkmarkClicked}
-													>
-														{todo.text}
-													</TodoItem>
-												)
-											}
-										} else if (this.state.filter === "completed") {
-											if (todo.done === true) {
-												return (
-													<TodoItem
-														handleRemove={this.handleRemove}
-														id={index}
-														done={todo.done}
-														checkmarkDisplay={todo.checkmark}
-														iconOpen={todo.iconOpen}
-														doubleClicked={todo.doubleClicked}
-														key={'checkbox' + index}
-														onDoubleClick={this.handleDoubleClick}
-														onSlideLeft={this.handleSliding}
-														doneEditting={this.doneEditting}
-														checkmarkClicked={this.checkmarkClicked}
-													>
-														{todo.text}
-													</TodoItem>
-												)
-											}
-										} else if (this.state.filter === "all") {
-											return (
-												<TodoItem
-													handleRemove={this.handleRemove}
-													id={index}
-													done={todo.done}
-													checkmarkDisplay={todo.checkmark}
-													iconOpen={todo.iconOpen}
-													doubleClicked={todo.doubleClicked}
-													key={'checkbox' + index}
-													onDoubleClick={this.handleDoubleClick}
-													onSlideLeft={this.handleSliding}
-													doneEditting={this.doneEditting}
-													checkmarkClicked={this.checkmarkClicked}
-												>
-													{todo.text}
-												</TodoItem>
-											)
+									{todos.map((todo, index) => {
+										const { done, checkmark, iconOpen, doubleClicked, text } = todo
+										const thisTodoItem = (
+											<TodoItem
+												handleRemove={this.handleRemove}
+												id={index}
+												done={done}
+												checkmarkDisplay={checkmark}
+												iconOpen={iconOpen}
+												doubleClicked={doubleClicked}
+												key={'checkbox' + index}
+												onDoubleClick={this.handleDoubleClick}
+												onSlideLeft={this.handleSliding}
+												doneEditting={this.doneEditting}
+												checkmarkClicked={this.checkmarkClicked}
+											>
+												{text}
+											</TodoItem>
+										)
+										if (filter === "incomplete" && done === false) {
+											return thisTodoItem
+										} else if (filter === "completed" && done === true) {
+											return thisTodoItem
+										} else if (filter === "all") {
+											return thisTodoItem
 										}
 									})}
 								</GroupedCardList>

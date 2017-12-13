@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import Icon from '@allthings/elements/atoms/Icon'
 import Text from '@allthings/elements/atoms/Text'
+import Checkmark from '@allthings/elements/molecules/Checkmark'
 import ListItem from '@allthings/elements/molecules/List/ListItem'
 import TextInput from '@allthings/elements/molecules/TextInput'
-import Icon from '@allthings/elements/atoms/Icon'
-import Checkmark from '@allthings/elements/molecules/Checkmark'
 import { css } from 'glamor'
 
 class TodoItem extends React.Component {
@@ -53,7 +53,7 @@ class TodoItem extends React.Component {
     })
   }
 
-  closeIcons = (transition) => {
+  closeIcons = transition => {
     this.setState({
       checkmark: 'flex',
       slideLeft: -70,
@@ -66,25 +66,22 @@ class TodoItem extends React.Component {
   handleTouchMove = event => {
     event.preventDefault()
     const { slideLeft, touchStart } = this.state
+    const { onSlideLeft, id } = this.props
     const touchObj = event.changedTouches[0].clientX
     const dist = parseInt(touchObj,) - touchStart
     if (slideLeft < 0 && dist < -10) {
       this.openIcons()
-      this.props.onSlideLeft(this.props.id, 'open')
+      onSlideLeft(id, 'open')
     } else if (dist > 5) {
       this.closeIcons('200ms')
-      this.props.onSlideLeft(this.props.id, 'close')
+      onSlideLeft(id, 'close')
     }
-    console.log('after opening', this.state)
   }
 
   render() {
     const { id, children, done, doubleClicked, iconOpen } = this.props
     const { icons, iconTransition, slideLeft, checkmark } = this.state
-    //console.log('index', id, 'this state is', this.state, 'props are', this.props)
     const checkmarkNo = (iconOpen || doubleClicked) ? 'none' : checkmark
-    //const iconsNo = (iconOpen || doubleClicked) ? '150' :((!iconOpen && !doubleClicked) ? '0' : icons)
-    //const slideLeftNo = (iconOpen || doubleClicked) ? '0' :((!iconOpen && !doubleClicked) ? '-70' : slideLeft)
     const styles = {
       check: css({
         height: '40px',
