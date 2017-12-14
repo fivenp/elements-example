@@ -14,6 +14,49 @@ import ThemeProvider from '@allthings/elements/behaviour/ThemeProvider'
 import TodoItem from './TodoItem'
 import { css } from 'glamor'
 
+const styles = {
+	create: css({
+		':hover': { cursor: 'pointer '}
+	}),
+	inset: css({
+		width: '93%'
+	}),
+	new: css({
+		padding: 0,
+		width: '100%',
+		display: 'flex'
+	}),
+	iconStyle: css({
+		display: 'inline-block',
+		marginRight: '10px',
+		position: 'absolute'
+	}),
+	titleBar: css({
+		padding: '10px 15px 10px 0px'
+	}),
+	titleText: css({
+		display: 'inline-block',
+		padding: '0 35px',
+		position: 'relative'
+	}),
+	buttonDiv: css({
+		textAlign: 'center'
+	}),
+	button: css({
+		margin: '3px'
+	}),
+	textInput: css({
+		display: 'inline-block',
+		width: '100%',
+		':focus': { outline: 'none' }
+	}),
+	add: css({
+		display: 'inline-block',
+		float: 'right',
+		margin: '15px 10px 15px 0px'
+	})
+}
+
 const DemoTheme = {
 	primary: ColorPalette.red,
 	text: ColorPalette.text.primary,
@@ -155,48 +198,6 @@ class App extends Component {
 	}
 
 	render() {
-		const styles = {
-			create: css({
-				':hover': { cursor: 'pointer '}
-			}),
-			inset: css({
-				width: '93%'
-			}),
-			new: css({
-				padding: 0,
-				width: '100%',
-				display: 'flex'
-			}),
-			iconStyle: css({
-				display: 'inline-block',
-				marginRight: '10px',
-				position: 'absolute'
-			}),
-			titleBar: css({
-				padding: '10px 15px 10px 0px'
-			}),
-			titleText: css({
-				display: 'inline-block',
-				padding: '0 35px',
-				position: 'relative'
-			}),
-			buttonDiv: css({
-				textAlign: 'center'
-			}),
-			button: css({
-				margin: '3px'
-			}),
-			textInput: css({
-				display: 'inline-block',
-				width: '100%',
-				':focus': { outline: 'none' }
-			}),
-			add: css({
-				display: 'inline-block',
-				float: 'right',
-				margin: '15px 10px 15px 0px'
-			})
-		}
 
 		const { todos, filter, textDisable } = this.state
 
