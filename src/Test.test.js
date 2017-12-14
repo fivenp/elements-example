@@ -4,6 +4,8 @@ import Test from './Test'
 
 describe('a suite', function() {
   it('returns div', function() {
-    expect(shallow(<Test />).contains(<div className="foo">Bar</div>)).toBe(true)
+    expect(shallow(<Test />).contains(<div className="foo">Bar</div>)).toBe(
+      true
+    )
   })
 })

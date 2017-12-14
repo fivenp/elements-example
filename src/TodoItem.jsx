@@ -12,13 +12,13 @@ const dynamicStyles = (checkmarkNo, icons, iconTransition, slideLeft) => ({
     height: '40px',
     width: '40px',
     display: checkmarkNo + ' !important',
-    margin: '3px 0px'
+    margin: '3px 0px',
   }),
   inline: css({
     overflow: 'hidden',
     display: 'inline-flex',
     width: icons,
-    transitionDelay: iconTransition
+    transitionDelay: iconTransition,
   }),
   remove: css({
     float: 'right',
@@ -26,7 +26,7 @@ const dynamicStyles = (checkmarkNo, icons, iconTransition, slideLeft) => ({
     margin: '3px',
     right: slideLeft,
     transition: 'all 300ms ease',
-    ':hover': { cursor: 'pointer' }
+    ':hover': { cursor: 'pointer' },
   }),
   iconBackground: css({
     position: 'absolute',
@@ -35,42 +35,42 @@ const dynamicStyles = (checkmarkNo, icons, iconTransition, slideLeft) => ({
     right: slideLeft,
     transition: 'all 300ms ease',
     height: '35.5px',
-    width: '40px'
+    width: '40px',
   }),
 })
 
 const styles = {
   list: css({
-    display: 'inline-flex'
+    display: 'inline-flex',
   }),
   listItem: css({
     minHeight: '50px',
-    width: '100%'
+    width: '100%',
   }),
   task: css({
     display: 'inline-flex',
     width: '90%',
-    padding: '10px 0'
+    padding: '10px 0',
   }),
   text: css({
     margin: '0px 10px',
     width: '100%',
     height: '50.5px',
-    display: 'table'
+    display: 'table',
   }),
   removeDiv: css({
     position: 'relative',
     overflow: 'hidden',
     height: '50.5px',
     width: '53.5px',
-    padding: '0px 10px 15px 10px'
+    padding: '0px 10px 15px 10px',
   }),
   editDiv: css({
     position: 'relative',
     overflow: 'hidden',
     height: '50.5px',
     width: '53.5px',
-    padding: '0px 10px 15px 10px'
+    padding: '0px 10px 15px 10px',
   }),
   gray: css({
     backgroundColor: 'gray',
@@ -82,19 +82,19 @@ const styles = {
   }),
   editField: css({
     padding: 0,
-    ':focus': { outline: 'none' }
+    ':focus': { outline: 'none' },
   }),
   staticText: css({
     display: 'table-cell !important',
-    verticalAlign: 'middle'
-  })
+    verticalAlign: 'middle',
+  }),
 }
 
 class TodoItem extends React.Component {
   static propTypes = {
     id: PropTypes.number.isRequired,
     children: PropTypes.string.isRequired,
-    done: PropTypes.bool.isRequired
+    done: PropTypes.bool.isRequired,
   }
 
   state = {
@@ -107,7 +107,7 @@ class TodoItem extends React.Component {
 
   handleRemove = () => {
     this.closeIcons('')
-    this.props.handleRemove(this.props.id) 
+    this.props.handleRemove(this.props.id)
   }
 
   handleEdit = event => {
@@ -132,7 +132,7 @@ class TodoItem extends React.Component {
       checkmark: 'none',
       slideLeft: 0,
       icons: 150,
-      iconTransition: ''
+      iconTransition: '',
     })
   }
 
@@ -151,7 +151,7 @@ class TodoItem extends React.Component {
     const { slideLeft, touchStart } = this.state
     const { onSlideLeft, id } = this.props
     const touchObj = event.changedTouches[0].clientX
-    const dist = parseInt(touchObj,) - touchStart
+    const dist = parseInt(touchObj) - touchStart
     if (slideLeft < 0 && dist < -10) {
       this.openIcons()
       onSlideLeft(id, 'open')
@@ -164,28 +164,63 @@ class TodoItem extends React.Component {
   render() {
     const { id, children, done, doubleClicked, iconOpen } = this.props
     const { icons, iconTransition, slideLeft, checkmark } = this.state
-    const checkmarkNo = (iconOpen || doubleClicked) ? 'none' : checkmark
-    
+    const checkmarkNo = iconOpen || doubleClicked ? 'none' : checkmark
+
     const dStyles = dynamicStyles(checkmarkNo, icons, iconTransition, slideLeft)
 
     return (
       <div {...styles.list}>
         <ListItem {...styles.listItem}>
           <div {...styles.task}>
-            <Checkmark id={`checkmark${id}`} checked={done} onClick={this.handleCheckClick} {...dStyles.check} />
-            <div {...styles.text} onDoubleClick={this.handleEdit} onTouchStart={this.handleTouchStart} onTouchMove={this.handleTouchMove} >
-              {doubleClicked ? <TextInput id={id} name="edit" defaultValue={children} placeholder="Edit todo" onKeyPress={this.handleEditComplete} {...styles.editField} /> : <Text autoBreak={true} id={id} {...styles.staticText}>{children}</Text>}
+            <Checkmark
+              id={`checkmark${id}`}
+              checked={done}
+              onClick={this.handleCheckClick}
+              {...dStyles.check}
+            />
+            <div
+              {...styles.text}
+              onDoubleClick={this.handleEdit}
+              onTouchStart={this.handleTouchStart}
+              onTouchMove={this.handleTouchMove}
+            >
+              {doubleClicked ? (
+                <TextInput
+                  id={id}
+                  name="edit"
+                  defaultValue={children}
+                  placeholder="Edit todo"
+                  onKeyPress={this.handleEditComplete}
+                  {...styles.editField}
+                />
+              ) : (
+                <Text autoBreak={true} id={id} {...styles.staticText}>
+                  {children}
+                </Text>
+              )}
             </div>
           </div>
           <div {...dStyles.inline}>
             <div {...styles.editDiv}>
-              <div  {...dStyles.iconBackground} {...styles.gray}>
-                <Icon name="edit" {...dStyles.remove} size="m" color="white" onClick={this.handleEdit} />
+              <div {...dStyles.iconBackground} {...styles.gray}>
+                <Icon
+                  name="edit"
+                  {...dStyles.remove}
+                  size="m"
+                  color="white"
+                  onClick={this.handleEdit}
+                />
               </div>
             </div>
             <div {...styles.removeDiv}>
               <div {...dStyles.iconBackground} {...styles.red}>
-                <Icon name="remove-light-filled" {...dStyles.remove} size="m" color="white" onClick={this.handleRemove} />
+                <Icon
+                  name="remove-light-filled"
+                  {...dStyles.remove}
+                  size="m"
+                  color="white"
+                  onClick={this.handleRemove}
+                />
               </div>
             </div>
           </div>
