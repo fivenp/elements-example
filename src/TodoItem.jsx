@@ -7,6 +7,89 @@ import ListItem from '@allthings/elements/molecules/List/ListItem'
 import TextInput from '@allthings/elements/molecules/TextInput'
 import { css } from 'glamor'
 
+const dynamicStyles = (checkmarkNo, icons, iconTransition, slideLeft) => ({
+  check: css({
+    height: '40px',
+    width: '40px',
+    display: checkmarkNo + ' !important',
+    margin: '3px 0px'
+  }),
+  inline: css({
+    overflow: 'hidden',
+    display: 'inline-flex',
+    width: icons,
+    transitionDelay: iconTransition
+  }),
+  remove: css({
+    float: 'right',
+    padding: '5px',
+    margin: '3px',
+    right: slideLeft,
+    transition: 'all 300ms ease',
+    ':hover': { cursor: 'pointer' }
+  }),
+  iconBackground: css({
+    position: 'absolute',
+    padding: '15px',
+    float: 'right',
+    right: slideLeft,
+    transition: 'all 300ms ease',
+    height: '35.5px',
+    width: '40px'
+  }),
+})
+
+const styles = {
+  list: css({
+    display: 'inline-flex'
+  }),
+  listItem: css({
+    minHeight: '50px',
+    width: '100%'
+  }),
+  task: css({
+    display: 'inline-flex',
+    width: '90%',
+    padding: '10px 0'
+  }),
+  text: css({
+    margin: '0px 10px',
+    width: '100%',
+    height: '50.5px',
+    display: 'table'
+  }),
+  removeDiv: css({
+    position: 'relative',
+    overflow: 'hidden',
+    height: '50.5px',
+    width: '53.5px',
+    padding: '0px 10px 15px 10px'
+  }),
+  editDiv: css({
+    position: 'relative',
+    overflow: 'hidden',
+    height: '50.5px',
+    width: '53.5px',
+    padding: '0px 10px 15px 10px'
+  }),
+  gray: css({
+    backgroundColor: 'gray',
+    transition: 'all 300ms ease',
+  }),
+  red: css({
+    backgroundColor: 'red',
+    transition: 'all 300ms ease',
+  }),
+  editField: css({
+    padding: 0,
+    ':focus': { outline: 'none' }
+  }),
+  staticText: css({
+    display: 'table-cell !important',
+    verticalAlign: 'middle'
+  })
+}
+
 class TodoItem extends React.Component {
   static propTypes = {
     id: PropTypes.number.isRequired,
@@ -64,7 +147,7 @@ class TodoItem extends React.Component {
   }
 
   handleTouchMove = event => {
-    event.preventDefault()
+    //event.preventDefault()
     const { slideLeft, touchStart } = this.state
     const { onSlideLeft, id } = this.props
     const touchObj = event.changedTouches[0].clientX
@@ -82,104 +165,27 @@ class TodoItem extends React.Component {
     const { id, children, done, doubleClicked, iconOpen } = this.props
     const { icons, iconTransition, slideLeft, checkmark } = this.state
     const checkmarkNo = (iconOpen || doubleClicked) ? 'none' : checkmark
-    const styles = {
-      check: css({
-        height: '40px',
-        width: '40px',
-        display: checkmarkNo + ' !important',
-        margin: '3px 0px'
-      }),
-      inline: css({
-        overflow: 'hidden',
-        display: 'inline-flex',
-        width: icons,
-        transitionDelay: iconTransition
-      }),
-      list: css({
-        display: 'inline-flex'
-      }),
-      listItem: css({
-        minHeight: '50px',
-        width: '100%'
-      }),
-      task: css({
-        display: 'inline-flex',
-        width: '90%',
-        padding: '10px 0'
-      }),
-      text: css({
-        margin: '0px 10px',
-        width: '100%',
-        height: '50.5px',
-        display: 'table'
-      }),
-      removeDiv: css({
-        position: 'relative',
-        overflow: 'hidden',
-        height: '50.5px',
-        width: '53.5px',
-        padding: '0px 10px 15px 10px'
-      }),
-      editDiv: css({
-        position: 'relative',
-        overflow: 'hidden',
-        height: '50.5px',
-        width: '53.5px',
-        padding: '0px 10px 15px 10px'
-      }),
-      remove: css({
-        float: 'right',
-        padding: '5px',
-        margin: '3px',
-        right: slideLeft,
-        transition: 'all 300ms ease',
-        ':hover': { cursor: 'pointer' }
-      }),
-      iconBackground: css({
-        position: 'absolute',
-        padding: '15px',
-        float: 'right',
-        right: slideLeft,
-        transition: 'all 300ms ease',
-        height: '35.5px',
-        width: '40px'
-      }),
-      gray: css({
-        backgroundColor: 'gray',
-        transition: 'all 300ms ease',
-      }),
-      red: css({
-        backgroundColor: 'red',
-        transition: 'all 300ms ease',
-      }),
-      editField: css({
-        padding: 0,
-        ':focus': { outline: 'none' }
-      }),
-      staticText: css({
-        display: 'table-cell !important',
-        verticalAlign: 'middle'
-      })
-    }
+    
+    const dStyles = dynamicStyles(checkmarkNo, icons, iconTransition, slideLeft)
 
     return (
       <div {...styles.list}>
         <ListItem {...styles.listItem}>
           <div {...styles.task}>
-            <Checkmark id={`checkmark${id}`} checked={done} onClick={this.handleCheckClick} {...styles.check} />
+            <Checkmark id={`checkmark${id}`} checked={done} onClick={this.handleCheckClick} {...dStyles.check} />
             <div {...styles.text} onDoubleClick={this.handleEdit} onTouchStart={this.handleTouchStart} onTouchMove={this.handleTouchMove} >
               {doubleClicked ? <TextInput id={id} name="edit" defaultValue={children} placeholder="Edit todo" onKeyPress={this.handleEditComplete} {...styles.editField} /> : <Text autoBreak={true} id={id} {...styles.staticText}>{children}</Text>}
             </div>
           </div>
-          <div {...styles.inline}>
+          <div {...dStyles.inline}>
             <div {...styles.editDiv}>
-              <div  {...styles.iconBackground} {...styles.gray}>
-                <Icon name="edit" {...styles.remove} size="m" color="white" onClick={this.handleEdit} />
+              <div  {...dStyles.iconBackground} {...styles.gray}>
+                <Icon name="edit" {...dStyles.remove} size="m" color="white" onClick={this.handleEdit} />
               </div>
             </div>
             <div {...styles.removeDiv}>
-              <div {...styles.iconBackground} {...styles.red}>
-                <Icon name="remove-light-filled" {...styles.remove} size="m" color="white" onClick={this.handleRemove} />
+              <div {...dStyles.iconBackground} {...styles.red}>
+                <Icon name="remove-light-filled" {...dStyles.remove} size="m" color="white" onClick={this.handleRemove} />
               </div>
             </div>
           </div>

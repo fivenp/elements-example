@@ -22,6 +22,7 @@ describe('TodoApp', () => {
   })
 
   it('should switch filter correctly', () => {
+    //mock button click
   })
 
   it('should render correct number of incomplete', () => {
