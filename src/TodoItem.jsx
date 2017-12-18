@@ -143,10 +143,7 @@ class TodoItem extends React.Component {
     })
   }
 
-  handleTouchStart = event => {
-    const touchX = event.changedTouches[0].clientX
-    this.setState({ touchStart: touchX })
-  }
+  handleTouchStart = event => this.setState({ touchStart: event.changedTouches[0].clientX })
 
   handleTouchMove = event => {
     const { slideLeft, touchStart } = this.state
@@ -166,7 +163,6 @@ class TodoItem extends React.Component {
     const { id, children, done, doubleClicked, iconOpen } = this.props
     const { icons, iconTransition, slideLeft, checkmark } = this.state
     const checkmarkNo = iconOpen || doubleClicked ? 'none' : checkmark
-
     const dStyles = dynamicStyles(checkmarkNo, icons, iconTransition, slideLeft)
 
     return (
