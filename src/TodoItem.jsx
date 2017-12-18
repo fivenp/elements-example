@@ -7,6 +7,8 @@ import ListItem from '@allthings/elements/molecules/List/ListItem'
 import TextInput from '@allthings/elements/molecules/TextInput'
 import { css } from 'glamor'
 
+const { number, string, bool } = PropTypes
+
 const dynamicStyles = (checkmarkNo, icons, iconTransition, slideLeft) => ({
   check: css({
     height: '40px',
@@ -92,9 +94,9 @@ const styles = {
 
 class TodoItem extends React.Component {
   static propTypes = {
-    id: PropTypes.number.isRequired,
-    children: PropTypes.string.isRequired,
-    done: PropTypes.bool.isRequired,
+    id: number.isRequired,
+    children: string.isRequired,
+    done: bool.isRequired,
   }
 
   state = {
@@ -110,22 +112,17 @@ class TodoItem extends React.Component {
     this.props.handleRemove(this.props.id)
   }
 
-  handleEdit = event => {
+  handleEdit = () => {
     this.closeIcons('')
     this.props.onDoubleClick(this.props.id)
   }
 
   handleEditComplete = event => {
-    this.props.doneEditting(event, this.props.id)
     this.closeIcons('')
+    this.props.doneEditting(event, this.props.id)
   }
 
   handleCheckClick = () => this.props.checkmarkClicked(this.props.id)
-
-  handleTouchStart = event => {
-    const touchX = event.changedTouches[0].clientX
-    this.setState({ touchStart: touchX })
-  }
 
   openIcons = () => {
     this.setState({
@@ -146,8 +143,12 @@ class TodoItem extends React.Component {
     })
   }
 
+  handleTouchStart = event => {
+    const touchX = event.changedTouches[0].clientX
+    this.setState({ touchStart: touchX })
+  }
+
   handleTouchMove = event => {
-    //event.preventDefault()
     const { slideLeft, touchStart } = this.state
     const { onSlideLeft, id } = this.props
     const touchObj = event.changedTouches[0].clientX
@@ -179,10 +180,10 @@ class TodoItem extends React.Component {
               {...dStyles.check}
             />
             <div
-              {...styles.text}
               onDoubleClick={this.handleEdit}
               onTouchStart={this.handleTouchStart}
               onTouchMove={this.handleTouchMove}
+              {...styles.text}
             >
               {doubleClicked ? (
                 <TextInput

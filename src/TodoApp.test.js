@@ -22,7 +22,10 @@ describe('TodoApp', () => {
   })
 
   it('should switch filter correctly', () => {
-    //mock button click
+    /*
+    wrapper.find('#add-task').simulate('click')
+    expect(wrapper.find('TodoItem')).toHaveLength(4)
+    */
   })
 
   it('should render correct number of incomplete', () => {
