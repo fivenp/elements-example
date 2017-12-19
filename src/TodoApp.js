@@ -100,6 +100,15 @@ class App extends Component {
     ],
     filter: 'all',
     textDisable: true,
+    newText: '',
+  }
+
+  constructor(props) {
+    super(props)
+  }
+
+  updateInput = event => {
+    this.setState({ newText: this.textInput.input.value })
   }
 
   componentDidMount = () => {
@@ -136,8 +145,7 @@ class App extends Component {
     if (event.key === 'Enter' && text) {
       this.addTodo()
     } else {
-      //dont access dom; use 'ref'> put it in state
-      const textExists = document.getElementById('new').value
+      const textExists = this.textInput.input.value
       if (textExists && this.state.textDisable) {
         this.setState({ textDisable: false })
       } else if (!textExists && !this.state.textDisable) {
@@ -147,7 +155,7 @@ class App extends Component {
   }
 
   addTodo = () => {
-    const text = document.getElementById('new').value
+    const text = this.textInput.input.value
     this.setState({
       todos: [
         ...this.state.todos,
@@ -155,9 +163,8 @@ class App extends Component {
       ],
       textDisable: true,
     })
-    //dont set value
-    document.getElementById('new').value = ''
-    document.getElementById('new').blur()
+    this.setState({ newText: '' })
+    this.textInput.input.blur()
   }
 
   changeFilter = ({ target: {className} }) => {
@@ -165,7 +172,7 @@ class App extends Component {
   }
 
   focusInput = event => {
-    document.getElementById('new').focus()
+    this.textInput.input.focus()
   }
 
   doneEditting = (event, id) => {
@@ -255,8 +262,11 @@ class App extends Component {
                     <TextInput
                       id="new"
                       name="new"
+                      ref={node => this.textInput = node}
                       placeholder="Add new"
+                      value={this.state.newText}
                       onKeyUp={this.handleKeyPress}
+                      onChange={this.updateInput.bind(this)}
                       {...styles.textInput}
                     />
                   </div>

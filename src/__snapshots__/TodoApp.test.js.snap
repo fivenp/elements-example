@@ -79,6 +79,7 @@ ShallowWrapper {
                 >
                   <TextInput
                     data-css-r9ebme=""
+                    defaultValue="testing"
                     id="new"
                     lines={1}
                     name="new"
@@ -239,6 +240,7 @@ ShallowWrapper {
                 >
                   <TextInput
                     data-css-r9ebme=""
+                    defaultValue="testing"
                     id="new"
                     lines={1}
                     name="new"
@@ -385,6 +387,7 @@ ShallowWrapper {
                 >
                   <TextInput
                     data-css-r9ebme=""
+                    defaultValue="testing"
                     id="new"
                     lines={1}
                     name="new"
@@ -534,6 +537,7 @@ ShallowWrapper {
                   >
                     <TextInput
                       data-css-r9ebme=""
+                      defaultValue="testing"
                       id="new"
                       lines={1}
                       name="new"
@@ -758,6 +762,7 @@ ShallowWrapper {
                     >
                       <TextInput
                         data-css-r9ebme=""
+                        defaultValue="testing"
                         id="new"
                         lines={1}
                         name="new"
@@ -862,6 +867,7 @@ ShallowWrapper {
                       >
                         <TextInput
                           data-css-r9ebme=""
+                          defaultValue="testing"
                           id="new"
                           lines={1}
                           name="new"
@@ -891,6 +897,7 @@ ShallowWrapper {
                       "props": Object {
                         "children": <TextInput
                           data-css-r9ebme=""
+                          defaultValue="testing"
                           id="new"
                           lines={1}
                           name="new"
@@ -908,6 +915,7 @@ ShallowWrapper {
                         "nodeType": "class",
                         "props": Object {
                           "data-css-r9ebme": "",
+                          "defaultValue": "testing",
                           "id": "new",
                           "lines": 1,
                           "name": "new",
@@ -1247,6 +1255,7 @@ ShallowWrapper {
                   >
                     <TextInput
                       data-css-r9ebme=""
+                      defaultValue="testing"
                       id="new"
                       lines={1}
                       name="new"
@@ -1407,6 +1416,7 @@ ShallowWrapper {
                   >
                     <TextInput
                       data-css-r9ebme=""
+                      defaultValue="testing"
                       id="new"
                       lines={1}
                       name="new"
@@ -1553,6 +1563,7 @@ ShallowWrapper {
                   >
                     <TextInput
                       data-css-r9ebme=""
+                      defaultValue="testing"
                       id="new"
                       lines={1}
                       name="new"
@@ -1702,6 +1713,7 @@ ShallowWrapper {
                     >
                       <TextInput
                         data-css-r9ebme=""
+                        defaultValue="testing"
                         id="new"
                         lines={1}
                         name="new"
@@ -1926,6 +1938,7 @@ ShallowWrapper {
                       >
                         <TextInput
                           data-css-r9ebme=""
+                          defaultValue="testing"
                           id="new"
                           lines={1}
                           name="new"
@@ -2030,6 +2043,7 @@ ShallowWrapper {
                         >
                           <TextInput
                             data-css-r9ebme=""
+                            defaultValue="testing"
                             id="new"
                             lines={1}
                             name="new"
@@ -2059,6 +2073,7 @@ ShallowWrapper {
                         "props": Object {
                           "children": <TextInput
                             data-css-r9ebme=""
+                            defaultValue="testing"
                             id="new"
                             lines={1}
                             name="new"
@@ -2076,6 +2091,7 @@ ShallowWrapper {
                           "nodeType": "class",
                           "props": Object {
                             "data-css-r9ebme": "",
+                            "defaultValue": "testing",
                             "id": "new",
                             "lines": 1,
                             "name": "new",
