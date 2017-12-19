@@ -38,7 +38,10 @@ describe('TodoApp', () => {
     })
     component.addTodo = jest.fn()
     component.update()
-    component.find('#add-task').first().simulate('click')
+    component
+      .find('#add-task')
+      .first()
+      .simulate('click')
     expect(component.addTodo).toHaveBeenCalled()
     //expect(component.find('TodoItem')).toHaveLength(4)
   })

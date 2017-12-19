@@ -143,7 +143,8 @@ class TodoItem extends React.Component {
     })
   }
 
-  handleTouchStart = event => this.setState({ touchStart: event.changedTouches[0].clientX })
+  handleTouchStart = event =>
+    this.setState({ touchStart: event.changedTouches[0].clientX })
 
   handleTouchMove = event => {
     const { slideLeft, touchStart } = this.state

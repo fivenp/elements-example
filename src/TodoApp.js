@@ -57,7 +57,6 @@ const styles = {
   }),
 }
 
-
 const buttonOpacity = 'rgba(232, 76, 61, 0.5)'
 
 const DemoTheme = {
@@ -130,7 +129,7 @@ class App extends Component {
 
   handleSliding = (id, type) => {
     const newTodo = [...this.state.todos]
-    newTodo[id].iconOpen = (type === 'open') ? true : false
+    newTodo[id].iconOpen = type === 'open' ? true : false
     this.setState({ todos: newTodo })
   }
 
@@ -159,7 +158,13 @@ class App extends Component {
     this.setState({
       todos: [
         ...this.state.todos,
-        { text, done: false, doubleClicked: false, checkmark: 'flex', iconOpen: false }
+        {
+          text,
+          done: false,
+          doubleClicked: false,
+          checkmark: 'flex',
+          iconOpen: false,
+        },
       ],
       textDisable: true,
     })
@@ -167,7 +172,7 @@ class App extends Component {
     this.textInput.input.blur()
   }
 
-  changeFilter = ({ target: {className} }) => {
+  changeFilter = ({ target: { className } }) => {
     this.setState({ filter: className })
   }
 
@@ -184,7 +189,7 @@ class App extends Component {
         doubleClicked: false,
         text,
         checkmark: 'flex',
-        iconOpen: false
+        iconOpen: false,
       }
       this.setState({ todos: newTodo })
     }
@@ -195,24 +200,25 @@ class App extends Component {
     const oldTodo = [...this.state.todos]
     const newTodo = oldTodo.map((todo, index) => {
       const { doubleClicked, iconOpen } = todo
-      if (doubleClicked && index.toString() !== event.srcElement.id) {
+      const eventId = event.srcElement.id
+      if (doubleClicked && index.toString() !== eventId) {
         todo = {
           ...todo,
           doubleClicked: false,
           checkmark: 'flex',
           iconOpen: false,
-          text: document.getElementById(index).value
+          text: document.getElementById(index).value,
         }
         return todo
-      } else if (iconOpen && index.toString() !== event.srcElement.id) {
+      } else if (iconOpen && index.toString() !== eventId) {
         todo = {
           ...todo,
           doubleClicked: false,
           checkmark: 'flex',
-          iconOpen: false
+          iconOpen: false,
         }
         return todo
-      } else if (doubleClicked && index.toString() === event.srcElement.id) {
+      } else if (doubleClicked && index.toString() === eventId) {
         return todo
       } else {
         return todo
@@ -224,9 +230,10 @@ class App extends Component {
   render() {
     const { todos, filter, textDisable } = this.state
 
-    const incomplete = todos.reduce((count, todo) => 
-      todo.done ? count: count + 1,
-    0)
+    const incomplete = todos.reduce(
+      (count, todo) => (todo.done ? count : count + 1),
+      0
+    )
 
     const incompleteNum =
       incomplete > 0 ? `Incomplete (${incomplete})` : 'Incomplete'
@@ -262,7 +269,7 @@ class App extends Component {
                     <TextInput
                       id="new"
                       name="new"
-                      ref={node => this.textInput = node}
+                      ref={node => (this.textInput = node)}
                       placeholder="Add new"
                       value={this.state.newText}
                       onKeyUp={this.handleKeyPress}
@@ -292,7 +299,9 @@ class App extends Component {
                   <Button
                     className="incomplete"
                     onClick={this.changeFilter}
-                    backgroundColor={filter !== 'incomplete' ? buttonOpacity : ''}
+                    backgroundColor={
+                      filter !== 'incomplete' ? buttonOpacity : ''
+                    }
                     {...styles.button}
                   >
                     <span className="incomplete">{incompleteNum}</span>
@@ -300,7 +309,9 @@ class App extends Component {
                   <Button
                     className="completed"
                     onClick={this.changeFilter}
-                    backgroundColor={filter !== 'completed' ? buttonOpacity : ''}
+                    backgroundColor={
+                      filter !== 'completed' ? buttonOpacity : ''
+                    }
                     {...styles.button}
                   >
                     <span className="completed">Completed</span>
@@ -332,7 +343,11 @@ class App extends Component {
                         {text}
                       </TodoItem>
                     )
-                    if ((filter === 'incomplete' && done === false) || ((filter === 'completed' && done === true) || filter === 'all')) {
+                    if (
+                      (filter === 'incomplete' && done === false) ||
+                      ((filter === 'completed' && done === true) ||
+                        filter === 'all')
+                    ) {
                       return thisTodoItem
                     }
                   })}
