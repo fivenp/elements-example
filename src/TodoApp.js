@@ -289,7 +289,6 @@ class App extends Component {
                 <div {...styles.buttonDiv}>
                   <Button
                     className="all"
-                    id="all-button"
                     onClick={this.changeFilter}
                     backgroundColor={filter !== 'all' ? buttonOpacity : ''}
                     {...styles.button}
@@ -307,6 +306,7 @@ class App extends Component {
                     <span className="incomplete">{incompleteNum}</span>
                   </Button>
                   <Button
+                    id="completed-button"
                     className="completed"
                     onClick={this.changeFilter}
                     backgroundColor={
