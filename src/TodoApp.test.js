@@ -1,9 +1,6 @@
 import React from 'react'
 import { shallow, mount, render } from 'enzyme'
 import TodoApp from './TodoApp'
-import serializer from 'enzyme-to-json/serializer'
-
-expect.addSnapshotSerializer(serializer)
 
 describe('TodoApp', () => {
   const wrapper = shallow(<TodoApp />)
@@ -44,7 +41,6 @@ describe('TodoApp buttons', () => {
     textDisable: false,
     newText: 'Text 4',
   })
-
 
   it('should add one TodoItem with correct text and #new TextInput value is cleared', () => {
     component

@@ -1,840 +1,108 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TodoItem it should match snapshot 1`] = `
-ShallowWrapper {
-  "length": 1,
-  Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <TodoItem
-    done={false}
-    id={0}
+<div
+  data-css-h0biv2=""
+>
+  <ListItem
+    backgroundColor="white"
+    data-css-zh5k6q=""
+    padded={true}
   >
-    Some Text
-  </TodoItem>,
-  Symbol(enzyme.__renderer__): Object {
-    "batchedUpdates": [Function],
-    "getNode": [Function],
-    "render": [Function],
-    "simulateEvent": [Function],
-    "unmount": [Function],
-  },
-  Symbol(enzyme.__node__): Object {
-    "instance": null,
-    "key": undefined,
-    "nodeType": "host",
-    "props": Object {
-      "children": <ListItem
-        backgroundColor="white"
-        data-css-zh5k6q=""
-        padded={true}
+    <div
+      data-css-154b89o=""
+    >
+      <_class
+        checked={true}
+        data-css-13isb4y=""
+        data-css-p2i0ep=""
+        id="checkmark0"
+        onClick={[Function]}
+      />
+      <div
+        className="touch"
+        data-css-leaz66=""
+        onDoubleClick={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+      >
+        <Text
+          autoBreak={true}
+          block={true}
+          color="text"
+          data-css-93utwa=""
+          id={0}
+          size="l"
+        >
+          Some Text
+        </Text>
+      </div>
+    </div>
+    <div
+      className="icon-div"
+      data-css-1r5myjm=""
+      style={
+        Object {
+          "transitionDelay": "",
+          "width": 0,
+        }
+      }
+    >
+      <div
+        data-css-b7lh05=""
       >
         <div
-          data-css-154b89o=""
+          data-css-1nax9fv=""
+          data-css-pmoomt=""
+          style={
+            Object {
+              "right": -70,
+            }
+          }
         >
-          <_class
-            checked={false}
-            data-css-1mql7k=""
-            id="checkmark0"
+          <Icon
+            className="edit-icon"
+            color="white"
+            data-css-fvks2t=""
+            name="edit"
             onClick={[Function]}
+            size="m"
+            style={
+              Object {
+                "right": -70,
+              }
+            }
           />
-          <div
-            data-css-leaz66=""
-            onDoubleClick={[Function]}
-            onTouchMove={[Function]}
-            onTouchStart={[Function]}
-          >
-            <Text
-              autoBreak={true}
-              block={true}
-              color="text"
-              data-css-93utwa=""
-              id={0}
-              size="l"
-            >
-              Some Text
-            </Text>
-          </div>
         </div>
+      </div>
+      <div
+        data-css-b7lh05=""
+      >
         <div
-          data-css-m0lcdg=""
+          data-css-1nax9fv=""
+          data-css-83ugar=""
+          style={
+            Object {
+              "right": -70,
+            }
+          }
         >
-          <div
-            data-css-b7lh05=""
-          >
-            <div
-              data-css-1ajzdj4=""
-              data-css-pmoomt=""
-            >
-              <Icon
-                color="white"
-                data-css-1lke24q=""
-                name="edit"
-                onClick={[Function]}
-                size="m"
-              />
-            </div>
-          </div>
-          <div
-            data-css-b7lh05=""
-          >
-            <div
-              data-css-1ajzdj4=""
-              data-css-83ugar=""
-            >
-              <Icon
-                color="white"
-                data-css-1lke24q=""
-                name="remove-light-filled"
-                onClick={[Function]}
-                size="m"
-              />
-            </div>
-          </div>
+          <Icon
+            className="remove-icon"
+            color="white"
+            data-css-fvks2t=""
+            name="remove-light-filled"
+            onClick={[Function]}
+            size="m"
+            style={
+              Object {
+                "right": -70,
+              }
+            }
+          />
         </div>
-      </ListItem>,
-      "data-css-h0biv2": "",
-    },
-    "ref": null,
-    "rendered": Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "function",
-      "props": Object {
-        "backgroundColor": "white",
-        "children": Array [
-          <div
-            data-css-154b89o=""
-          >
-            <_class
-              checked={false}
-              data-css-1mql7k=""
-              id="checkmark0"
-              onClick={[Function]}
-            />
-            <div
-              data-css-leaz66=""
-              onDoubleClick={[Function]}
-              onTouchMove={[Function]}
-              onTouchStart={[Function]}
-            >
-              <Text
-                autoBreak={true}
-                block={true}
-                color="text"
-                data-css-93utwa=""
-                id={0}
-                size="l"
-              >
-                Some Text
-              </Text>
-            </div>
-          </div>,
-          <div
-            data-css-m0lcdg=""
-          >
-            <div
-              data-css-b7lh05=""
-            >
-              <div
-                data-css-1ajzdj4=""
-                data-css-pmoomt=""
-              >
-                <Icon
-                  color="white"
-                  data-css-1lke24q=""
-                  name="edit"
-                  onClick={[Function]}
-                  size="m"
-                />
-              </div>
-            </div>
-            <div
-              data-css-b7lh05=""
-            >
-              <div
-                data-css-1ajzdj4=""
-                data-css-83ugar=""
-              >
-                <Icon
-                  color="white"
-                  data-css-1lke24q=""
-                  name="remove-light-filled"
-                  onClick={[Function]}
-                  size="m"
-                />
-              </div>
-            </div>
-          </div>,
-        ],
-        "data-css-zh5k6q": "",
-        "padded": true,
-      },
-      "ref": null,
-      "rendered": Array [
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": Array [
-              <_class
-                checked={false}
-                data-css-1mql7k=""
-                id="checkmark0"
-                onClick={[Function]}
-              />,
-              <div
-                data-css-leaz66=""
-                onDoubleClick={[Function]}
-                onTouchMove={[Function]}
-                onTouchStart={[Function]}
-              >
-                <Text
-                  autoBreak={true}
-                  block={true}
-                  color="text"
-                  data-css-93utwa=""
-                  id={0}
-                  size="l"
-                >
-                  Some Text
-                </Text>
-              </div>,
-            ],
-            "data-css-154b89o": "",
-          },
-          "ref": null,
-          "rendered": Array [
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "checked": false,
-                "data-css-1mql7k": "",
-                "id": "checkmark0",
-                "onClick": [Function],
-              },
-              "ref": null,
-              "rendered": null,
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": <Text
-                  autoBreak={true}
-                  block={true}
-                  color="text"
-                  data-css-93utwa=""
-                  id={0}
-                  size="l"
-                >
-                  Some Text
-                </Text>,
-                "data-css-leaz66": "",
-                "onDoubleClick": [Function],
-                "onTouchMove": [Function],
-                "onTouchStart": [Function],
-              },
-              "ref": null,
-              "rendered": Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "class",
-                "props": Object {
-                  "autoBreak": true,
-                  "block": true,
-                  "children": "Some Text",
-                  "color": "text",
-                  "data-css-93utwa": "",
-                  "id": 0,
-                  "size": "l",
-                },
-                "ref": null,
-                "rendered": "Some Text",
-                "type": [Function],
-              },
-              "type": "div",
-            },
-          ],
-          "type": "div",
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": Array [
-              <div
-                data-css-b7lh05=""
-              >
-                <div
-                  data-css-1ajzdj4=""
-                  data-css-pmoomt=""
-                >
-                  <Icon
-                    color="white"
-                    data-css-1lke24q=""
-                    name="edit"
-                    onClick={[Function]}
-                    size="m"
-                  />
-                </div>
-              </div>,
-              <div
-                data-css-b7lh05=""
-              >
-                <div
-                  data-css-1ajzdj4=""
-                  data-css-83ugar=""
-                >
-                  <Icon
-                    color="white"
-                    data-css-1lke24q=""
-                    name="remove-light-filled"
-                    onClick={[Function]}
-                    size="m"
-                  />
-                </div>
-              </div>,
-            ],
-            "data-css-m0lcdg": "",
-          },
-          "ref": null,
-          "rendered": Array [
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": <div
-                  data-css-1ajzdj4=""
-                  data-css-pmoomt=""
-                >
-                  <Icon
-                    color="white"
-                    data-css-1lke24q=""
-                    name="edit"
-                    onClick={[Function]}
-                    size="m"
-                  />
-                </div>,
-                "data-css-b7lh05": "",
-              },
-              "ref": null,
-              "rendered": Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": <Icon
-                    color="white"
-                    data-css-1lke24q=""
-                    name="edit"
-                    onClick={[Function]}
-                    size="m"
-                  />,
-                  "data-css-1ajzdj4": "",
-                  "data-css-pmoomt": "",
-                },
-                "ref": null,
-                "rendered": Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "class",
-                  "props": Object {
-                    "color": "white",
-                    "data-css-1lke24q": "",
-                    "name": "edit",
-                    "onClick": [Function],
-                    "size": "m",
-                  },
-                  "ref": null,
-                  "rendered": null,
-                  "type": [Function],
-                },
-                "type": "div",
-              },
-              "type": "div",
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": <div
-                  data-css-1ajzdj4=""
-                  data-css-83ugar=""
-                >
-                  <Icon
-                    color="white"
-                    data-css-1lke24q=""
-                    name="remove-light-filled"
-                    onClick={[Function]}
-                    size="m"
-                  />
-                </div>,
-                "data-css-b7lh05": "",
-              },
-              "ref": null,
-              "rendered": Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": <Icon
-                    color="white"
-                    data-css-1lke24q=""
-                    name="remove-light-filled"
-                    onClick={[Function]}
-                    size="m"
-                  />,
-                  "data-css-1ajzdj4": "",
-                  "data-css-83ugar": "",
-                },
-                "ref": null,
-                "rendered": Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "class",
-                  "props": Object {
-                    "color": "white",
-                    "data-css-1lke24q": "",
-                    "name": "remove-light-filled",
-                    "onClick": [Function],
-                    "size": "m",
-                  },
-                  "ref": null,
-                  "rendered": null,
-                  "type": [Function],
-                },
-                "type": "div",
-              },
-              "type": "div",
-            },
-          ],
-          "type": "div",
-        },
-      ],
-      "type": [Function],
-    },
-    "type": "div",
-  },
-  Symbol(enzyme.__nodes__): Array [
-    Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "host",
-      "props": Object {
-        "children": <ListItem
-          backgroundColor="white"
-          data-css-zh5k6q=""
-          padded={true}
-        >
-          <div
-            data-css-154b89o=""
-          >
-            <_class
-              checked={false}
-              data-css-1mql7k=""
-              id="checkmark0"
-              onClick={[Function]}
-            />
-            <div
-              data-css-leaz66=""
-              onDoubleClick={[Function]}
-              onTouchMove={[Function]}
-              onTouchStart={[Function]}
-            >
-              <Text
-                autoBreak={true}
-                block={true}
-                color="text"
-                data-css-93utwa=""
-                id={0}
-                size="l"
-              >
-                Some Text
-              </Text>
-            </div>
-          </div>
-          <div
-            data-css-m0lcdg=""
-          >
-            <div
-              data-css-b7lh05=""
-            >
-              <div
-                data-css-1ajzdj4=""
-                data-css-pmoomt=""
-              >
-                <Icon
-                  color="white"
-                  data-css-1lke24q=""
-                  name="edit"
-                  onClick={[Function]}
-                  size="m"
-                />
-              </div>
-            </div>
-            <div
-              data-css-b7lh05=""
-            >
-              <div
-                data-css-1ajzdj4=""
-                data-css-83ugar=""
-              >
-                <Icon
-                  color="white"
-                  data-css-1lke24q=""
-                  name="remove-light-filled"
-                  onClick={[Function]}
-                  size="m"
-                />
-              </div>
-            </div>
-          </div>
-        </ListItem>,
-        "data-css-h0biv2": "",
-      },
-      "ref": null,
-      "rendered": Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "function",
-        "props": Object {
-          "backgroundColor": "white",
-          "children": Array [
-            <div
-              data-css-154b89o=""
-            >
-              <_class
-                checked={false}
-                data-css-1mql7k=""
-                id="checkmark0"
-                onClick={[Function]}
-              />
-              <div
-                data-css-leaz66=""
-                onDoubleClick={[Function]}
-                onTouchMove={[Function]}
-                onTouchStart={[Function]}
-              >
-                <Text
-                  autoBreak={true}
-                  block={true}
-                  color="text"
-                  data-css-93utwa=""
-                  id={0}
-                  size="l"
-                >
-                  Some Text
-                </Text>
-              </div>
-            </div>,
-            <div
-              data-css-m0lcdg=""
-            >
-              <div
-                data-css-b7lh05=""
-              >
-                <div
-                  data-css-1ajzdj4=""
-                  data-css-pmoomt=""
-                >
-                  <Icon
-                    color="white"
-                    data-css-1lke24q=""
-                    name="edit"
-                    onClick={[Function]}
-                    size="m"
-                  />
-                </div>
-              </div>
-              <div
-                data-css-b7lh05=""
-              >
-                <div
-                  data-css-1ajzdj4=""
-                  data-css-83ugar=""
-                >
-                  <Icon
-                    color="white"
-                    data-css-1lke24q=""
-                    name="remove-light-filled"
-                    onClick={[Function]}
-                    size="m"
-                  />
-                </div>
-              </div>
-            </div>,
-          ],
-          "data-css-zh5k6q": "",
-          "padded": true,
-        },
-        "ref": null,
-        "rendered": Array [
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": Array [
-                <_class
-                  checked={false}
-                  data-css-1mql7k=""
-                  id="checkmark0"
-                  onClick={[Function]}
-                />,
-                <div
-                  data-css-leaz66=""
-                  onDoubleClick={[Function]}
-                  onTouchMove={[Function]}
-                  onTouchStart={[Function]}
-                >
-                  <Text
-                    autoBreak={true}
-                    block={true}
-                    color="text"
-                    data-css-93utwa=""
-                    id={0}
-                    size="l"
-                  >
-                    Some Text
-                  </Text>
-                </div>,
-              ],
-              "data-css-154b89o": "",
-            },
-            "ref": null,
-            "rendered": Array [
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "class",
-                "props": Object {
-                  "checked": false,
-                  "data-css-1mql7k": "",
-                  "id": "checkmark0",
-                  "onClick": [Function],
-                },
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": <Text
-                    autoBreak={true}
-                    block={true}
-                    color="text"
-                    data-css-93utwa=""
-                    id={0}
-                    size="l"
-                  >
-                    Some Text
-                  </Text>,
-                  "data-css-leaz66": "",
-                  "onDoubleClick": [Function],
-                  "onTouchMove": [Function],
-                  "onTouchStart": [Function],
-                },
-                "ref": null,
-                "rendered": Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "class",
-                  "props": Object {
-                    "autoBreak": true,
-                    "block": true,
-                    "children": "Some Text",
-                    "color": "text",
-                    "data-css-93utwa": "",
-                    "id": 0,
-                    "size": "l",
-                  },
-                  "ref": null,
-                  "rendered": "Some Text",
-                  "type": [Function],
-                },
-                "type": "div",
-              },
-            ],
-            "type": "div",
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": Array [
-                <div
-                  data-css-b7lh05=""
-                >
-                  <div
-                    data-css-1ajzdj4=""
-                    data-css-pmoomt=""
-                  >
-                    <Icon
-                      color="white"
-                      data-css-1lke24q=""
-                      name="edit"
-                      onClick={[Function]}
-                      size="m"
-                    />
-                  </div>
-                </div>,
-                <div
-                  data-css-b7lh05=""
-                >
-                  <div
-                    data-css-1ajzdj4=""
-                    data-css-83ugar=""
-                  >
-                    <Icon
-                      color="white"
-                      data-css-1lke24q=""
-                      name="remove-light-filled"
-                      onClick={[Function]}
-                      size="m"
-                    />
-                  </div>
-                </div>,
-              ],
-              "data-css-m0lcdg": "",
-            },
-            "ref": null,
-            "rendered": Array [
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": <div
-                    data-css-1ajzdj4=""
-                    data-css-pmoomt=""
-                  >
-                    <Icon
-                      color="white"
-                      data-css-1lke24q=""
-                      name="edit"
-                      onClick={[Function]}
-                      size="m"
-                    />
-                  </div>,
-                  "data-css-b7lh05": "",
-                },
-                "ref": null,
-                "rendered": Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": <Icon
-                      color="white"
-                      data-css-1lke24q=""
-                      name="edit"
-                      onClick={[Function]}
-                      size="m"
-                    />,
-                    "data-css-1ajzdj4": "",
-                    "data-css-pmoomt": "",
-                  },
-                  "ref": null,
-                  "rendered": Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "class",
-                    "props": Object {
-                      "color": "white",
-                      "data-css-1lke24q": "",
-                      "name": "edit",
-                      "onClick": [Function],
-                      "size": "m",
-                    },
-                    "ref": null,
-                    "rendered": null,
-                    "type": [Function],
-                  },
-                  "type": "div",
-                },
-                "type": "div",
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": <div
-                    data-css-1ajzdj4=""
-                    data-css-83ugar=""
-                  >
-                    <Icon
-                      color="white"
-                      data-css-1lke24q=""
-                      name="remove-light-filled"
-                      onClick={[Function]}
-                      size="m"
-                    />
-                  </div>,
-                  "data-css-b7lh05": "",
-                },
-                "ref": null,
-                "rendered": Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": <Icon
-                      color="white"
-                      data-css-1lke24q=""
-                      name="remove-light-filled"
-                      onClick={[Function]}
-                      size="m"
-                    />,
-                    "data-css-1ajzdj4": "",
-                    "data-css-83ugar": "",
-                  },
-                  "ref": null,
-                  "rendered": Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "class",
-                    "props": Object {
-                      "color": "white",
-                      "data-css-1lke24q": "",
-                      "name": "remove-light-filled",
-                      "onClick": [Function],
-                      "size": "m",
-                    },
-                    "ref": null,
-                    "rendered": null,
-                    "type": [Function],
-                  },
-                  "type": "div",
-                },
-                "type": "div",
-              },
-            ],
-            "type": "div",
-          },
-        ],
-        "type": [Function],
-      },
-      "type": "div",
-    },
-  ],
-  Symbol(enzyme.__options__): Object {
-    "adapter": ReactSixteenAdapter {
-      "options": Object {
-        "enableComponentDidUpdateOnSetState": true,
-      },
-    },
-  },
-}
+      </div>
+    </div>
+  </ListItem>
+</div>
 `;

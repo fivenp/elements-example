@@ -7,26 +7,39 @@ import ListItem from '@allthings/elements/molecules/List/ListItem'
 import TextInput from '@allthings/elements/molecules/TextInput'
 import { css } from 'glamor'
 
+//{children}{this.state.touchStart} & state.touchStart = undefined
 const { number, string, bool } = PropTypes
 
 const dynamicStyles = (checkmarkNo, icons, iconTransition, slideLeft) => ({
   check: css({
+    display: checkmarkNo + ' !important',
+  }),
+  inline: {
+    width: icons,
+    transitionDelay: iconTransition,
+  },
+  remove: {
+    right: slideLeft,
+  },
+  iconBackground: {
+    right: slideLeft,
+  },
+})
+
+const styles = {
+  check: css({
     height: '40px',
     width: '40px',
-    display: checkmarkNo + ' !important',
     margin: '3px 0px',
   }),
   inline: css({
     overflow: 'hidden',
     display: 'inline-flex',
-    width: icons,
-    transitionDelay: iconTransition,
   }),
   remove: css({
     float: 'right',
     padding: '5px',
     margin: '3px',
-    right: slideLeft,
     transition: 'all 300ms ease',
     ':hover': { cursor: 'pointer' },
   }),
@@ -34,14 +47,10 @@ const dynamicStyles = (checkmarkNo, icons, iconTransition, slideLeft) => ({
     position: 'absolute',
     padding: '15px',
     float: 'right',
-    right: slideLeft,
     transition: 'all 300ms ease',
     height: '35.5px',
     width: '40px',
   }),
-})
-
-const styles = {
   list: css({
     display: 'inline-flex',
   }),
@@ -143,8 +152,7 @@ class TodoItem extends React.Component {
     })
   }
 
-  handleTouchStart = event =>
-    this.setState({ touchStart: event.changedTouches[0].clientX })
+  handleTouchStart = event => this.setState({ touchStart: event.changedTouches[0].clientX })
 
   handleTouchMove = event => {
     const { slideLeft, touchStart } = this.state
@@ -164,7 +172,7 @@ class TodoItem extends React.Component {
     const { id, children, done, doubleClicked, iconOpen } = this.props
     const { icons, iconTransition, slideLeft, checkmark } = this.state
     const checkmarkNo = iconOpen || doubleClicked ? 'none' : checkmark
-    const dStyles = dynamicStyles(checkmarkNo, icons, iconTransition, slideLeft)
+    const stylesDynamic = dynamicStyles(checkmarkNo, icons, iconTransition, slideLeft)
 
     return (
       <div {...styles.list}>
@@ -174,9 +182,11 @@ class TodoItem extends React.Component {
               id={`checkmark${id}`}
               checked={done}
               onClick={this.handleCheckClick}
-              {...dStyles.check}
+              {...stylesDynamic.check}
+              {...styles.check}
             />
             <div
+              className="touch"
               onDoubleClick={this.handleEdit}
               onTouchStart={this.handleTouchStart}
               onTouchMove={this.handleTouchMove}
@@ -185,6 +195,7 @@ class TodoItem extends React.Component {
               {doubleClicked ? (
                 <TextInput
                   id={id}
+                  className="edit-input"
                   name="edit"
                   defaultValue={children}
                   placeholder="Edit todo"
@@ -198,12 +209,14 @@ class TodoItem extends React.Component {
               )}
             </div>
           </div>
-          <div {...dStyles.inline}>
+          <div className="icon-div" style={stylesDynamic.inline} {...styles.inline}>
             <div {...styles.editDiv}>
-              <div {...dStyles.iconBackground} {...styles.gray}>
+              <div style={stylesDynamic.iconBackground} {...styles.iconBackground} {...styles.gray}>
                 <Icon
+                  className="edit-icon"
                   name="edit"
-                  {...dStyles.remove}
+                  style={stylesDynamic.remove}
+                  {...styles.remove}
                   size="m"
                   color="white"
                   onClick={this.handleEdit}
@@ -211,10 +224,12 @@ class TodoItem extends React.Component {
               </div>
             </div>
             <div {...styles.removeDiv}>
-              <div {...dStyles.iconBackground} {...styles.red}>
+              <div style={stylesDynamic.iconBackground} {...styles.iconBackground} {...styles.red}>
                 <Icon
+                  className="remove-icon"
                   name="remove-light-filled"
-                  {...dStyles.remove}
+                  style={stylesDynamic.remove}
+                  {...styles.remove}
                   size="m"
                   color="white"
                   onClick={this.handleRemove}

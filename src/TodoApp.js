@@ -176,7 +176,7 @@ class App extends Component {
     this.setState({ filter: className })
   }
 
-  focusInput = event => {
+  focusInput = () => {
     this.textInput.input.focus()
   }
 
@@ -196,6 +196,7 @@ class App extends Component {
   }
 
   finishEdit = event => {
+    console.log('event is', event)
     console.log('finish edit triggered', this.state.todos)
     const oldTodo = [...this.state.todos]
     const newTodo = oldTodo.map((todo, index) => {
