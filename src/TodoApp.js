@@ -192,12 +192,13 @@ class App extends Component {
   }
 
   finishEdit = event => {
+    alert('event triggered')
     const oldTodo = [...this.state.todos]
     const hasId = element => {
       return element.id !== ""
     }
     const pathId = event.path.find(hasId).id
-    alert('pathid', pathId)
+    alert('pathid')
 
     const newTodo = oldTodo.map((todo, index) => {
       alert('new todo!!')
