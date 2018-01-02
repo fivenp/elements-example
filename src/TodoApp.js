@@ -209,6 +209,12 @@ class App extends Component {
       } else if (event.srcElement.nodeName === 'path') {
         console.log('path in da hosue')
         return todo
+      } else if (doubleClicked && index.toString() === event.srcElement.id) {
+        console.log('index matches event id & doubleClicked')
+        return todo
+      } else if (iconOpen && index.toString() === event.srcElement.id) {
+        console.log('index matches event id & iconOpen')
+        return todo
       }
       else if (doubleClicked && eventId !== 'icon-div') {
         console.log('2')
