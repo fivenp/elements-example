@@ -192,7 +192,6 @@ class App extends Component {
   }
 
   finishEdit = event => {
-    alert('ajskdjfkakdfsf')
     const oldTodo = [...this.state.todos]
     const hasId = element => {
       return element.id !== ""
@@ -203,6 +202,7 @@ class App extends Component {
       const { doubleClicked, iconOpen } = todo
       const eventId = event.srcElement.id
       if (doubleClicked && index.toString() !== pathId) {
+        alert('1', 'doubleclicked', doubleClicked, 'iconopen', iconOpen, 'index', index, 'pathid', pathId)
         todo = {
           ...todo,
           doubleClicked: false,
@@ -212,6 +212,7 @@ class App extends Component {
         }
         return todo
       } else if (iconOpen && index.toString() !== pathId) {
+        alert('2', 'doubleclicked', doubleClicked, 'iconopen', iconOpen, 'index', index, 'pathid', pathId)
         todo = {
           ...todo,
           doubleClicked: false,
@@ -220,8 +221,10 @@ class App extends Component {
         }
         return todo
       } else if ((doubleClicked || iconOpen) && index.toString() === pathId) {
+        alert('3', 'doubleclicked', doubleClicked, 'iconopen', iconOpen, 'index', index, 'pathid', pathId)
         return todo
       } else {
+        alert('1', 'doubleclicked', doubleClicked, 'iconopen', iconOpen, 'index', index, 'pathid', pathId)
         return todo
       }
     })
