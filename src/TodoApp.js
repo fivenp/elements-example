@@ -199,7 +199,7 @@ class App extends Component {
       return element.id !== ""
     }
     console.log('event path', event)
-    const pathId = event.path.find(hasId).id
+    //const pathId = event.path.find(hasId).id
     //alert('pathid')
 
     const newTodo = oldTodo.map((todo, index) => {
