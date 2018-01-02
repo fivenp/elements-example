@@ -197,8 +197,10 @@ class App extends Component {
       return element.id !== ""
     }
     const pathId = event.path.find(hasId).id
+    alert('pathid', pathId)
 
     const newTodo = oldTodo.map((todo, index) => {
+      alert('new todo!!')
       const { doubleClicked, iconOpen } = todo
       const eventId = event.srcElement.id
       if (doubleClicked && index.toString() !== pathId) {
