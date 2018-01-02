@@ -192,6 +192,7 @@ class App extends Component {
   }
 
   finishEdit = event => {
+    alert('ajskdjfkakdfsf')
     const oldTodo = [...this.state.todos]
     const hasId = element => {
       return element.id !== ""
