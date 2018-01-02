@@ -215,7 +215,7 @@ class App extends Component {
           text: document.getElementById(index).value,
         }
         return todo
-      } else if (iconOpen && index.toString() !== pathId) {
+      } else if (iconOpen && index.toString() !== eventId) {
         //alert('2', 'doubleclicked', doubleClicked, 'iconopen', iconOpen, 'index', index, 'pathid', pathId)
         todo = {
           ...todo,
@@ -224,7 +224,7 @@ class App extends Component {
           iconOpen: false
         }
         return todo
-      } else if ((doubleClicked || iconOpen) && index.toString() === pathId) {
+      } else if ((doubleClicked || iconOpen) && index.toString() === eventId) {
         //alert('3', 'doubleclicked', doubleClicked, 'iconopen', iconOpen, 'index', index, 'pathid', pathId)
         return todo
       } else {
