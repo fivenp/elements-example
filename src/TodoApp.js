@@ -192,11 +192,13 @@ class App extends Component {
   }
 
   finishEdit = event => {
+    event.stopPropagation()
     //alert('event triggered')
     const oldTodo = [...this.state.todos]
     const hasId = element => {
       return element.id !== ""
     }
+    console.log('event path', event)
     const pathId = event.path.find(hasId).id
     //alert('pathid')
 
