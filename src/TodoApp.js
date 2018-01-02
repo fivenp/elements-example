@@ -107,7 +107,7 @@ class App extends Component {
   }
 
   componentDidMount = () => {
-    //document.addEventListener('touchend', this.finishEdit)
+    document.addEventListener('touchend', this.finishEdit)
     document.addEventListener('mouseup', this.finishEdit)
   }
 
@@ -193,9 +193,6 @@ class App extends Component {
 
   finishEdit = event => {
     const oldTodo = [...this.state.todos]
-    const hasId = element => {
-      return element.id !== ""
-    }
     console.log('event path', event)
 
     const eventId = event.srcElement.id
