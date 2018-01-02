@@ -202,7 +202,7 @@ class App extends Component {
     */
 
     const newTodo = oldTodo.map((todo, index) => {
-      alert('new todo!!')
+      //alert('new todo!!')
       const { doubleClicked, iconOpen } = todo
       const eventId = event.srcElement.id
       if (doubleClicked && index.toString() !== eventId) {
