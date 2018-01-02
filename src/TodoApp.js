@@ -107,7 +107,7 @@ class App extends Component {
   }
 
   componentDidMount = () => {
-    document.addEventListener('touchend', this.finishEdit)
+    //document.addEventListener('touchend', this.finishEdit)
     document.addEventListener('mouseup', this.finishEdit)
   }
 
@@ -202,10 +202,10 @@ class App extends Component {
     //const pathId = event.path.find(hasId).id
     //alert('pathid')
 
+      const eventId = event.srcElement.id
     const newTodo = oldTodo.map((todo, index) => {
       //alert('new todo!!')
       const { doubleClicked, iconOpen } = todo
-      const eventId = event.srcElement.id
       console.log('event', eventId, 'id', index)
       if (doubleClicked && index.toString() !== eventId) {
         //alert('1', 'doubleclicked', doubleClicked, 'iconopen', iconOpen, 'index', index, 'pathid', pathId)
@@ -226,7 +226,10 @@ class App extends Component {
           iconOpen: false
         }
         return todo
-      } else if ((doubleClicked || iconOpen) && index.toString() === eventId) {
+      } else if (doubleClicked && index.toString() === eventId) {
+        //alert('3', 'doubleclicked', doubleClicked, 'iconopen', iconOpen, 'index', index, 'pathid', pathId)
+        return todo
+      } else if (iconOpen && index.toString() === eventId) {
         //alert('3', 'doubleclicked', doubleClicked, 'iconopen', iconOpen, 'index', index, 'pathid', pathId)
         return todo
       } else {
