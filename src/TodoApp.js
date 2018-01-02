@@ -194,9 +194,7 @@ class App extends Component {
   finishEdit = event => {
     const oldTodo = [...this.state.todos]
     const eventSrc = event.srcElement
-    const eventClass = eventSrc.className
-    const eventId = eventSrc.id
-    const eventNode = eventSrc.nodeName
+    const { id: eventId, nodeName: eventNode, className: eventClass } = eventSrc
     const newTodo = oldTodo.map((todo, index) => {
       const { doubleClicked, iconOpen } = todo
       if (eventClass === 'icon-div' || eventNode === ('svg' || 'path')) {
