@@ -192,6 +192,7 @@ class App extends Component {
   }
 
   finishEdit = event => {
+    event.stopPropagation()
     const oldTodo = [...this.state.todos]
     console.log('event path', event)
     //const eventId = event.type === 'mouseup' ? event.srcElement.id : event.target.parentElement.id
@@ -213,7 +214,7 @@ class App extends Component {
         console.log('index matches event id & doubleClicked')
         return todo
       } else if (iconOpen && index.toString() === event.srcElement.id) {
-        console.log('index matches event id & iconOpen')
+        console.log('index matches event id & iconopen')
         return todo
       }
       else if (doubleClicked && eventId !== 'icon-div') {
