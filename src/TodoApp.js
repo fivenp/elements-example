@@ -195,7 +195,7 @@ class App extends Component {
     const oldTodo = [...this.state.todos]
     console.log('event path', event)
     //const eventId = event.type === 'mouseup' ? event.srcElement.id : event.target.parentElement.id
-    const eventId = event.srcElement.id ? event.srcElement.id : event.srcElement.parentElement.id
+    const eventId = event.srcElement.id
     const newTodo = oldTodo.map((todo, index) => {
       const { doubleClicked, iconOpen } = todo
       console.log('event', eventId, 'id', index)
