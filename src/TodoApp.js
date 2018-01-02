@@ -201,7 +201,7 @@ class App extends Component {
       const { doubleClicked, iconOpen } = todo
       const eventId = event.srcElement.id
       if (doubleClicked && index.toString() !== eventId) {
-        alert('1', 'doubleclicked', doubleClicked, 'iconopen', iconOpen, 'index', index, 'pathid', pathId)
+        alert('1', 'doubleclicked', doubleClicked, 'iconopen', iconOpen, 'index', index, 'pathid')
         todo = {
           ...todo,
           doubleClicked: false,
@@ -211,7 +211,7 @@ class App extends Component {
         }
         return todo
       } else if (iconOpen && index.toString() !== eventId) {
-        alert('2', 'doubleclicked', doubleClicked, 'iconopen', iconOpen, 'index', index, 'pathid', pathId)
+        alert('2', 'doubleclicked', doubleClicked, 'iconopen', iconOpen, 'index', index, 'pathid')
         todo = {
           ...todo,
           doubleClicked: false,
@@ -220,10 +220,10 @@ class App extends Component {
         }
         return todo
       } else if ((doubleClicked || iconOpen) && index.toString() === eventId) {
-        alert('3', 'doubleclicked', doubleClicked, 'iconopen', iconOpen, 'index', index, 'pathid', pathId)
+        alert('3', 'doubleclicked', doubleClicked, 'iconopen', iconOpen, 'index', index, 'pathid')
         return todo
       } else {
-        alert('1', 'doubleclicked', doubleClicked, 'iconopen', iconOpen, 'index', index, 'pathid', pathId)
+        alert('1', 'doubleclicked', doubleClicked, 'iconopen', iconOpen, 'index', index, 'pathid')
         return todo
       }
     })
