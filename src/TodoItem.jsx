@@ -215,6 +215,7 @@ class TodoItem extends React.Component {
               <div style={stylesDynamic.iconBackground} {...styles.iconBackground} {...styles.gray}>
                 <Icon
                   className="edit-icon"
+                  id={id}
                   name="edit"
                   size="m"
                   color="white"
@@ -228,6 +229,7 @@ class TodoItem extends React.Component {
               <div style={stylesDynamic.iconBackground} {...styles.iconBackground} {...styles.red}>
                 <Icon
                   className="remove-icon"
+                  id={id}
                   name="remove-light-filled"
                   size="m"
                   color="white"

@@ -206,6 +206,7 @@ class App extends Component {
       //alert('new todo!!')
       const { doubleClicked, iconOpen } = todo
       const eventId = event.srcElement.id
+      console.log('event', eventId, 'id', index)
       if (doubleClicked && index.toString() !== pathId) {
         //alert('1', 'doubleclicked', doubleClicked, 'iconopen', iconOpen, 'index', index, 'pathid', pathId)
         todo = {
