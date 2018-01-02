@@ -178,6 +178,10 @@ class TodoItem extends React.Component {
       ? dynamicStyles('flex', 0, '', -70)
       : dynamicStyles(checkmarkNo, icons, iconTransition, slideLeft)
 
+    const editClasses = ['icon-div', 'edit-icon']
+    const mainIconClass = ['icon-div', 'main-icon-div']
+    const removeClass = ['icon-div', 'remove-icon']
+
     return (
       <div {...styles.list}>
         <ListItem {...styles.listItem}>
@@ -214,7 +218,7 @@ class TodoItem extends React.Component {
             </div>
           </div>
           <div
-            className="icon-div"
+            className= {mainIconClass.join(' ')}
             style={stylesDynamic.inline}
             {...styles.inline}
           >
@@ -226,7 +230,7 @@ class TodoItem extends React.Component {
                 {...styles.gray}
               >
                 <Icon
-                  className="icon-div"
+                  className={editClasses.join(' ')}
                   name="edit"
                   size="m"
                   color="white"
@@ -244,7 +248,7 @@ class TodoItem extends React.Component {
                 {...styles.red}
               >
                 <Icon
-                  className="icon-div"
+                  className={removeClass.join(' ')}
                   name="remove-light-filled"
                   size="m"
                   color="white"

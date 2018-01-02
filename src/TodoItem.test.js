@@ -74,7 +74,7 @@ describe('TodoItem buttons', () => {
       component
         .find(TodoItem)
         .first()
-        .find('div.icon-div')
+        .find('div.main-icon-div')
         .props().style.width
     ).toEqual(0)
 
@@ -90,7 +90,7 @@ describe('TodoItem buttons', () => {
       component
         .find(TodoItem)
         .first()
-        .find('div.icon-div')
+        .find('div.main-icon-div')
         .props().style.width
     ).toEqual(150)
 
@@ -106,7 +106,7 @@ describe('TodoItem buttons', () => {
       component
         .find(TodoItem)
         .first()
-        .find('div.icon-div')
+        .find('div.main-icon-div')
         .props().style.width
     ).toEqual(0)
   })

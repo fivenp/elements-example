@@ -51,7 +51,7 @@ exports[`TodoApp should match snapshot (no buttons clicked) 1`] = `
           </Inset>
           <Icon
             color="#FFFFFF"
-            data-css-fanwgg=""
+            data-css-1eqigeq=""
             name="plus-light"
             onClick={[Function]}
             size="m"

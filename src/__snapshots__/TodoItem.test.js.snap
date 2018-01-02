@@ -39,7 +39,7 @@ exports[`TodoItem it should match snapshot 1`] = `
       </div>
     </div>
     <div
-      className="icon-div"
+      className="icon-div main-icon-div"
       data-css-1r5myjm=""
       style={
         Object {
@@ -49,9 +49,11 @@ exports[`TodoItem it should match snapshot 1`] = `
       }
     >
       <div
+        className="icon-div"
         data-css-b7lh05=""
       >
         <div
+          className="icon-div"
           data-css-1nax9fv=""
           data-css-pmoomt=""
           style={
@@ -61,7 +63,7 @@ exports[`TodoItem it should match snapshot 1`] = `
           }
         >
           <Icon
-            className="edit-icon"
+            className="icon-div edit-icon"
             color="white"
             data-css-fvks2t=""
             name="edit"
@@ -76,9 +78,11 @@ exports[`TodoItem it should match snapshot 1`] = `
         </div>
       </div>
       <div
+        className="icon-div"
         data-css-b7lh05=""
       >
         <div
+          className="icon-div"
           data-css-1nax9fv=""
           data-css-83ugar=""
           style={
@@ -88,7 +92,7 @@ exports[`TodoItem it should match snapshot 1`] = `
           }
         >
           <Icon
-            className="remove-icon"
+            className="icon-div remove-icon"
             color="white"
             data-css-fvks2t=""
             name="remove-light-filled"
