@@ -211,10 +211,11 @@ class TodoItem extends React.Component {
             </div>
           </div>
           <div id={id} className="icon-div" style={stylesDynamic.inline} {...styles.inline}>
-            <div className="icon-div-2" {...styles.editDiv}>
-              <div className="icon-div-3" style={stylesDynamic.iconBackground} {...styles.iconBackground} {...styles.gray}>
+            <div className="icon-div" {...styles.editDiv}>
+              <div className="icon-div" style={stylesDynamic.iconBackground} {...styles.iconBackground} {...styles.gray}>
                 <Icon
                   className="edit-icon"
+                  className="icon-div"
                   id={id}
                   name="edit"
                   size="m"
@@ -225,10 +226,11 @@ class TodoItem extends React.Component {
                 />
               </div>
             </div>
-            <div className="icon-div-2" {...styles.removeDiv}>
-              <div className="icon-div-3"  style={stylesDynamic.iconBackground} {...styles.iconBackground} {...styles.red}>
+            <div className="icon-div" {...styles.removeDiv}>
+              <div className="icon-div"  style={stylesDynamic.iconBackground} {...styles.iconBackground} {...styles.red}>
                 <Icon
                   className="remove-icon"
+                  className="icon-div"
                   id={id}
                   name="remove-light-filled"
                   size="m"
