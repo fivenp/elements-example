@@ -172,8 +172,8 @@ class TodoItem extends React.Component {
     const { icons, iconTransition, slideLeft, checkmark } = this.state
     const checkmarkNo = iconOpen || doubleClicked ? 'none' : checkmark
 
-    const stylesDynamic = !iconOpen ? dynamicStyles('flex', 0, '', -70) : dynamicStyles(checkmarkNo, icons, iconTransition, slideLeft)
-    //const stylesDynamic = dynamicStyles(checkmarkNo, icons, iconTransition, slideLeft)
+    //const stylesDynamic = !iconOpen ? dynamicStyles('flex', 0, '', -70) : dynamicStyles(checkmarkNo, icons, iconTransition, slideLeft)
+    const stylesDynamic = dynamicStyles(checkmarkNo, icons, iconTransition, slideLeft)
 
     return (
       <div {...styles.list}>
