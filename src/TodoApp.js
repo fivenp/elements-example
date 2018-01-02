@@ -192,19 +192,14 @@ class App extends Component {
   }
 
   finishEdit = event => {
-    event.stopPropagation()
-    //alert('event triggered')
     const oldTodo = [...this.state.todos]
     const hasId = element => {
       return element.id !== ""
     }
     console.log('event path', event)
-    //const pathId = event.path.find(hasId).id
-    //alert('pathid')
 
-      const eventId = event.srcElement.id
+    const eventId = event.srcElement.id
     const newTodo = oldTodo.map((todo, index) => {
-      //alert('new todo!!')
       const { doubleClicked, iconOpen } = todo
       console.log('event', eventId, 'id', index)
       if (doubleClicked && index.toString() !== eventId) {
