@@ -201,7 +201,7 @@ class App extends Component {
     const newTodo = oldTodo.map((todo, index) => {
       const { doubleClicked, iconOpen } = todo
       const eventId = event.srcElement.id
-      if (doubleClicked && index.toString() !== eventId) {
+      if (doubleClicked && index.toString() !== pathId) {
         todo = {
           ...todo,
           doubleClicked: false,
@@ -210,7 +210,7 @@ class App extends Component {
           text: document.getElementById(index).value,
         }
         return todo
-      } else if (iconOpen && index.toString() !== eventId) {
+      } else if (iconOpen && index.toString() !== pathId) {
         todo = {
           ...todo,
           doubleClicked: false,
@@ -218,7 +218,7 @@ class App extends Component {
           iconOpen: false
         }
         return todo
-      } else if ((doubleClicked || iconOpen) && index.toString() === eventId) {
+      } else if ((doubleClicked || iconOpen) && index.toString() === pathId) {
         return todo
       } else {
         return todo
