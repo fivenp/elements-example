@@ -107,8 +107,8 @@ class App extends Component {
   }
 
   componentDidMount = () => {
-    document.addEventListener('touchstart', this.finishEdit)
-    document.addEventListener('mousedown', this.finishEdit)
+    document.addEventListener('touchend', this.finishEdit)
+    document.addEventListener('mouseup', this.finishEdit)
   }
 
   handleRemove = id => {
