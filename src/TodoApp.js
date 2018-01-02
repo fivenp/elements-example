@@ -107,8 +107,8 @@ class App extends Component {
   }
 
   componentDidMount = () => {
-    document.addEventListener('touchend', this.finishEdit)
-    document.addEventListener('mouseup', this.finishEdit)
+    document.addEventListener('touchstart', this.finishEdit)
+    document.addEventListener('mousedown', this.finishEdit)
   }
 
   handleRemove = id => {
@@ -195,16 +195,23 @@ class App extends Component {
     const oldTodo = [...this.state.todos]
     console.log('event path', event)
     //const eventId = event.type === 'mouseup' ? event.srcElement.id : event.target.parentElement.id
-    const eventId = event.srcElement.id 
+    const eventId = event.srcElement.className
+    console.log('eventid is', eventId)
     const newTodo = oldTodo.map((todo, index) => {
       const { doubleClicked, iconOpen } = todo
       console.log('event', eventId, 'id', index)
-      if (event.target.tagName === 'svg') {
+      if (eventId === 'icon-div') {
         console.log('weeee')
         return todo
+      } else if (event.srcElement.nodeName === 'svg') {
+        console.log('svg in da house')
+        return todo
+      } else if (event.srcElement.nodeName === 'path') {
+        console.log('path in da hosue')
+        return todo
       }
-      else if (doubleClicked && index.toString() !== eventId) {
-        //alert('1', 'doubleclicked', doubleClicked, 'iconopen', iconOpen, 'index', index, 'pathid', pathId)
+      else if (doubleClicked && eventId !== 'icon-div') {
+        console.log('2')
         todo = {
           ...todo,
           doubleClicked: false,
@@ -213,8 +220,8 @@ class App extends Component {
           text: document.getElementById(index).value,
         }
         return todo
-      } else if (iconOpen && index.toString() !== eventId) {
-        //alert('2', 'doubleclicked', doubleClicked, 'iconopen', iconOpen, 'index', index, 'pathid', pathId)
+      } else if (iconOpen && eventId !== 'icon-div') {
+        console.log('3')
         todo = {
           ...todo,
           doubleClicked: false,
@@ -223,12 +230,15 @@ class App extends Component {
         }
         return todo
       } else if (doubleClicked && index.toString() === eventId) {
+        console.log('4')
         //alert('3', 'doubleclicked', doubleClicked, 'iconopen', iconOpen, 'index', index, 'pathid', pathId)
         return todo
       } else if (iconOpen && index.toString() === eventId) {
+        console.log('5')
         //alert('3', 'doubleclicked', doubleClicked, 'iconopen', iconOpen, 'index', index, 'pathid', pathId)
         return todo
       } else {
+        console.log('6')
         //alert('1', 'doubleclicked', doubleClicked, 'iconopen', iconOpen, 'index', index, 'pathid', pathId)
         return todo
       }
