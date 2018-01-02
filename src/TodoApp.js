@@ -192,33 +192,18 @@ class App extends Component {
   }
 
   finishEdit = event => {
-    event.stopPropagation()
     const oldTodo = [...this.state.todos]
-    console.log('event path', event)
-    //const eventId = event.type === 'mouseup' ? event.srcElement.id : event.target.parentElement.id
-    const eventId = event.srcElement.className
-    console.log('eventid is', eventId)
+    const eventSrc = event.srcElement
+    const eventClass = eventSrc.className
+    const eventId = eventSrc.id
+    const eventNode = eventSrc.nodeName
     const newTodo = oldTodo.map((todo, index) => {
       const { doubleClicked, iconOpen } = todo
-      console.log('event', eventId, 'id', index)
-      if (eventId === 'icon-div') {
-        console.log('weeee')
+      if (eventClass === 'icon-div' || eventNode === ('svg' || 'path')) {
         return todo
-      } else if (event.srcElement.nodeName === 'svg') {
-        console.log('svg in da house')
+      } else if ((doubleClicked || iconOpen) && index.toString() === eventId) {
         return todo
-      } else if (event.srcElement.nodeName === 'path') {
-        console.log('path in da hosue')
-        return todo
-      } else if (doubleClicked && index.toString() === event.srcElement.id) {
-        console.log('index matches event id & doubleClicked')
-        return todo
-      } else if (iconOpen && index.toString() === event.srcElement.id) {
-        console.log('index matches event id & iconopen')
-        return todo
-      }
-      else if (doubleClicked && eventId !== 'icon-div') {
-        console.log('2')
+      } else if (doubleClicked && eventClass !== 'icon-div') {
         todo = {
           ...todo,
           doubleClicked: false,
@@ -227,26 +212,15 @@ class App extends Component {
           text: document.getElementById(index).value,
         }
         return todo
-      } else if (iconOpen && eventId !== 'icon-div') {
-        console.log('3')
+      } else if (iconOpen && eventClass !== 'icon-div') {
         todo = {
           ...todo,
           doubleClicked: false,
           checkmark: 'flex',
-          iconOpen: false
+          iconOpen: false,
         }
         return todo
-      } else if (doubleClicked && index.toString() === eventId) {
-        console.log('4')
-        //alert('3', 'doubleclicked', doubleClicked, 'iconopen', iconOpen, 'index', index, 'pathid', pathId)
-        return todo
-      } else if (iconOpen && index.toString() === eventId) {
-        console.log('5')
-        //alert('3', 'doubleclicked', doubleClicked, 'iconopen', iconOpen, 'index', index, 'pathid', pathId)
-        return todo
       } else {
-        console.log('6')
-        //alert('1', 'doubleclicked', doubleClicked, 'iconopen', iconOpen, 'index', index, 'pathid', pathId)
         return todo
       }
     })
@@ -348,7 +322,7 @@ class App extends Component {
                       checkmark,
                       iconOpen,
                       doubleClicked,
-                      text
+                      text,
                     } = todo
                     const thisTodoItem = (
                       <TodoItem

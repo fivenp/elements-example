@@ -112,7 +112,7 @@ class TodoItem extends React.Component {
     icons: 0,
     iconTransition: '',
     slideLeft: -70,
-    checkmark: 'flex'
+    checkmark: 'flex',
   }
 
   handleRemove = () => {
@@ -132,24 +132,26 @@ class TodoItem extends React.Component {
 
   handleCheckClick = () => this.props.checkmarkClicked(this.props.id)
 
-  openIcons = () => this.setState({
-    checkmark: 'none',
-    slideLeft: 0,
-    icons: 150,
-    iconTransition: '',
-  })
+  openIcons = () =>
+    this.setState({
+      checkmark: 'none',
+      slideLeft: 0,
+      icons: 150,
+      iconTransition: '',
+    })
 
-  closeIcons = transition => this.setState({
-    checkmark: 'flex',
-    slideLeft: -70,
-    icons: 0,
-    iconTransition: transition || '',
-    doubleClicked: false,
-  })
+  closeIcons = transition =>
+    this.setState({
+      checkmark: 'flex',
+      slideLeft: -70,
+      icons: 0,
+      iconTransition: transition || '',
+      doubleClicked: false,
+    })
 
   handleTouchStart = event => {
     this.setState({
-      touchStart: event.changedTouches[0].clientX
+      touchStart: event.changedTouches[0].clientX,
     })
   }
 
@@ -172,8 +174,9 @@ class TodoItem extends React.Component {
     const { icons, iconTransition, slideLeft, checkmark } = this.state
     const checkmarkNo = iconOpen || doubleClicked ? 'none' : checkmark
 
-    const stylesDynamic = !iconOpen ? dynamicStyles('flex', 0, '', -70) : dynamicStyles(checkmarkNo, icons, iconTransition, slideLeft)
-    //const stylesDynamic = dynamicStyles(checkmarkNo, icons, iconTransition, slideLeft)
+    const stylesDynamic = !iconOpen
+      ? dynamicStyles('flex', 0, '', -70)
+      : dynamicStyles(checkmarkNo, icons, iconTransition, slideLeft)
 
     return (
       <div {...styles.list}>
@@ -210,9 +213,19 @@ class TodoItem extends React.Component {
               )}
             </div>
           </div>
-          <div id={id} className="icon-div" style={stylesDynamic.inline} {...styles.inline}>
+          <div
+            id={id}
+            className="icon-div"
+            style={stylesDynamic.inline}
+            {...styles.inline}
+          >
             <div className="icon-div" {...styles.editDiv}>
-              <div className="icon-div" style={stylesDynamic.iconBackground} {...styles.iconBackground} {...styles.gray}>
+              <div
+                className="icon-div"
+                style={stylesDynamic.iconBackground}
+                {...styles.iconBackground}
+                {...styles.gray}
+              >
                 <Icon
                   className="edit-icon"
                   className="icon-div"
@@ -227,7 +240,12 @@ class TodoItem extends React.Component {
               </div>
             </div>
             <div className="icon-div" {...styles.removeDiv}>
-              <div className="icon-div"  style={stylesDynamic.iconBackground} {...styles.iconBackground} {...styles.red}>
+              <div
+                className="icon-div"
+                style={stylesDynamic.iconBackground}
+                {...styles.iconBackground}
+                {...styles.red}
+              >
                 <Icon
                   className="remove-icon"
                   className="icon-div"

@@ -5,12 +5,12 @@ import TodoApp from './TodoApp'
 
 describe('TodoItem', () => {
   it('it should match snapshot', () => {
-  const wrapper = shallow(
-    <TodoItem id={0} done={true}>
-    Some Text
-    </TodoItem>
-  )
-  expect(wrapper).toMatchSnapshot()
+    const wrapper = shallow(
+      <TodoItem id={0} done={true}>
+        Some Text
+      </TodoItem>
+    )
+    expect(wrapper).toMatchSnapshot()
   })
 })
 
@@ -48,29 +48,67 @@ describe('TodoItem buttons', () => {
       .find('#checkmark0')
       .first()
       .simulate('click')
-    expect(component.find(TodoItem).first().prop('done')).toBe(true)
+    expect(
+      component
+        .find(TodoItem)
+        .first()
+        .prop('done')
+    ).toBe(true)
   })
 
   it('should correctly change width of div containing icons if slided >10px', () => {
-    const touchDiv = component.find(TodoItem).first().find('div.touch')
+    const touchDiv = component
+      .find(TodoItem)
+      .first()
+      .find('div.touch')
 
     //doesn't do anything if slide is =<10px
     touchDiv
-      .simulate('touchStart', { changedTouches: [{ clientX: 243, clientY: 234 }] })
-      .simulate('touchMove', { changedTouches: [{ clientX: 233, clientY: 234 }] })
-    expect(component.find(TodoItem).first().find('div.icon-div').props().style.width).toEqual(0)
+      .simulate('touchStart', {
+        changedTouches: [{ clientX: 243, clientY: 234 }],
+      })
+      .simulate('touchMove', {
+        changedTouches: [{ clientX: 233, clientY: 234 }],
+      })
+    expect(
+      component
+        .find(TodoItem)
+        .first()
+        .find('div.icon-div')
+        .props().style.width
+    ).toEqual(0)
 
     //shows icon div if slided right >10px
     touchDiv
-      .simulate('touchStart', { changedTouches: [{ clientX: 243, clientY: 234 }] })
-      .simulate('touchMove', { changedTouches: [{ clientX: 230, clientY: 234 }] })
-    expect(component.find(TodoItem).first().find('div.icon-div').props().style.width).toEqual(150)
+      .simulate('touchStart', {
+        changedTouches: [{ clientX: 243, clientY: 234 }],
+      })
+      .simulate('touchMove', {
+        changedTouches: [{ clientX: 230, clientY: 234 }],
+      })
+    expect(
+      component
+        .find(TodoItem)
+        .first()
+        .find('div.icon-div')
+        .props().style.width
+    ).toEqual(150)
 
     //puts away icon div if slided right >10px
     touchDiv
-      .simulate('touchStart', { changedTouches: [{ clientX: 230, clientY: 234 }] })
-      .simulate('touchMove', { changedTouches: [{ clientX: 243, clientY: 234 }] })
-    expect(component.find(TodoItem).first().find('div.icon-div').props().style.width).toEqual(0)
+      .simulate('touchStart', {
+        changedTouches: [{ clientX: 230, clientY: 234 }],
+      })
+      .simulate('touchMove', {
+        changedTouches: [{ clientX: 243, clientY: 234 }],
+      })
+    expect(
+      component
+        .find(TodoItem)
+        .first()
+        .find('div.icon-div')
+        .props().style.width
+    ).toEqual(0)
   })
 
   it('should change text to input if edit is clicked', () => {

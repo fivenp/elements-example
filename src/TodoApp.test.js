@@ -48,12 +48,20 @@ describe('TodoApp buttons', () => {
       .first()
       .simulate('click')
     expect(component.find('TodoItem')).toHaveLength(4)
-    expect(component.find('TodoItem').at(3).prop('children')).toBe('Text 4')
+    expect(
+      component
+        .find('TodoItem')
+        .at(3)
+        .prop('children')
+    ).toBe('Text 4')
     expect(component.find('TextInput').prop('value')).toBe('')
   })
 
   it('filter buttons should filter correctly', () => {
-    component.find('#completed-button').first().simulate('click')
+    component
+      .find('#completed-button')
+      .first()
+      .simulate('click')
     expect(component.find('TodoItem')).toHaveLength(1)
   })
 })
