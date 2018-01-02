@@ -16,7 +16,7 @@ import { css } from 'glamor'
 
 const styles = {
   create: css({
-    ':hover': { cursor: 'pointer ' },
+    ':hover': { cursor: 'pointer' },
   }),
   inset: css({
     width: '93%',
@@ -102,17 +102,13 @@ class App extends Component {
     newText: '',
   }
 
-  constructor(props) {
-    super(props)
-  }
-
   updateInput = event => {
     this.setState({ newText: this.textInput.input.value })
   }
 
   componentDidMount = () => {
-    document.addEventListener('touchend', this.finishEdit)
-    document.addEventListener('mouseup', this.finishEdit)
+    document.addEventListener('touchstart', this.finishEdit)
+    document.addEventListener('mousedown', this.finishEdit)
   }
 
   handleRemove = id => {
@@ -196,13 +192,16 @@ class App extends Component {
   }
 
   finishEdit = event => {
-    console.log('event is', event)
-    console.log('finish edit triggered', this.state.todos)
     const oldTodo = [...this.state.todos]
+    const hasId = element => {
+      return element.id !== ""
+    }
+    const pathId = event.path.find(hasId).id
+
     const newTodo = oldTodo.map((todo, index) => {
       const { doubleClicked, iconOpen } = todo
       const eventId = event.srcElement.id
-      if (doubleClicked && index.toString() !== eventId) {
+      if (doubleClicked && index.toString() !== pathId) {
         todo = {
           ...todo,
           doubleClicked: false,
@@ -211,15 +210,15 @@ class App extends Component {
           text: document.getElementById(index).value,
         }
         return todo
-      } else if (iconOpen && index.toString() !== eventId) {
+      } else if (iconOpen && index.toString() !== pathId) {
         todo = {
           ...todo,
           doubleClicked: false,
           checkmark: 'flex',
-          iconOpen: false,
+          iconOpen: false
         }
         return todo
-      } else if (doubleClicked && index.toString() === eventId) {
+      } else if ((doubleClicked || iconOpen) && index.toString() === pathId) {
         return todo
       } else {
         return todo
@@ -230,12 +229,10 @@ class App extends Component {
 
   render() {
     const { todos, filter, textDisable } = this.state
-
     const incomplete = todos.reduce(
       (count, todo) => (todo.done ? count : count + 1),
       0
     )
-
     const incompleteNum =
       incomplete > 0 ? `Incomplete (${incomplete})` : 'Incomplete'
 
@@ -325,7 +322,7 @@ class App extends Component {
                       checkmark,
                       iconOpen,
                       doubleClicked,
-                      text,
+                      text
                     } = todo
                     const thisTodoItem = (
                       <TodoItem

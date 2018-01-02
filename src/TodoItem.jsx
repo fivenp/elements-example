@@ -7,7 +7,6 @@ import ListItem from '@allthings/elements/molecules/List/ListItem'
 import TextInput from '@allthings/elements/molecules/TextInput'
 import { css } from 'glamor'
 
-//{children}{this.state.touchStart} & state.touchStart = undefined
 const { number, string, bool } = PropTypes
 
 const dynamicStyles = (checkmarkNo, icons, iconTransition, slideLeft) => ({
@@ -113,7 +112,7 @@ class TodoItem extends React.Component {
     icons: 0,
     iconTransition: '',
     slideLeft: -70,
-    checkmark: this.props.checkmarkDisplay || 'flex',
+    checkmark: 'flex'
   }
 
   handleRemove = () => {
@@ -133,33 +132,33 @@ class TodoItem extends React.Component {
 
   handleCheckClick = () => this.props.checkmarkClicked(this.props.id)
 
-  openIcons = () => {
+  openIcons = () => this.setState({
+    checkmark: 'none',
+    slideLeft: 0,
+    icons: 150,
+    iconTransition: '',
+  })
+
+  closeIcons = transition => this.setState({
+    checkmark: 'flex',
+    slideLeft: -70,
+    icons: 0,
+    iconTransition: transition || '',
+    doubleClicked: false,
+  })
+
+  handleTouchStart = event => {
     this.setState({
-      checkmark: 'none',
-      slideLeft: 0,
-      icons: 150,
-      iconTransition: '',
+      touchStart: event.changedTouches[0].clientX
     })
   }
-
-  closeIcons = transition => {
-    this.setState({
-      checkmark: 'flex',
-      slideLeft: -70,
-      icons: 0,
-      iconTransition: transition || '',
-      doubleClicked: false,
-    })
-  }
-
-  handleTouchStart = event => this.setState({ touchStart: event.changedTouches[0].clientX })
 
   handleTouchMove = event => {
     const { slideLeft, touchStart } = this.state
     const { onSlideLeft, id } = this.props
     const touchObj = event.changedTouches[0].clientX
     const dist = parseInt(touchObj) - touchStart
-    if (slideLeft < 0 && dist < -10) {
+    if (dist < -10) {
       this.openIcons()
       onSlideLeft(id, 'open')
     } else if (dist > 5) {
@@ -172,7 +171,7 @@ class TodoItem extends React.Component {
     const { id, children, done, doubleClicked, iconOpen } = this.props
     const { icons, iconTransition, slideLeft, checkmark } = this.state
     const checkmarkNo = iconOpen || doubleClicked ? 'none' : checkmark
-    const stylesDynamic = dynamicStyles(checkmarkNo, icons, iconTransition, slideLeft)
+    const stylesDynamic = !iconOpen ? dynamicStyles('flex', 0, '', -70) : dynamicStyles(checkmarkNo, icons, iconTransition, slideLeft)
 
     return (
       <div {...styles.list}>
@@ -209,17 +208,17 @@ class TodoItem extends React.Component {
               )}
             </div>
           </div>
-          <div className="icon-div" style={stylesDynamic.inline} {...styles.inline}>
+          <div id={id} className="icon-div" style={stylesDynamic.inline} {...styles.inline}>
             <div {...styles.editDiv}>
               <div style={stylesDynamic.iconBackground} {...styles.iconBackground} {...styles.gray}>
                 <Icon
                   className="edit-icon"
                   name="edit"
-                  style={stylesDynamic.remove}
-                  {...styles.remove}
                   size="m"
                   color="white"
                   onClick={this.handleEdit}
+                  style={stylesDynamic.remove}
+                  {...styles.remove}
                 />
               </div>
             </div>
@@ -228,11 +227,11 @@ class TodoItem extends React.Component {
                 <Icon
                   className="remove-icon"
                   name="remove-light-filled"
-                  style={stylesDynamic.remove}
-                  {...styles.remove}
                   size="m"
                   color="white"
                   onClick={this.handleRemove}
+                  style={stylesDynamic.remove}
+                  {...styles.remove}
                 />
               </div>
             </div>

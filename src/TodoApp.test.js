@@ -42,7 +42,7 @@ describe('TodoApp buttons', () => {
     newText: 'Text 4',
   })
 
-  it('should add one TodoItem with correct text and #new TextInput value is cleared', () => {
+  it('add button should add one TodoItem with correct text and #new TextInput value is cleared', () => {
     component
       .find('#add-task')
       .first()
@@ -52,7 +52,7 @@ describe('TodoApp buttons', () => {
     expect(component.find('TextInput').prop('value')).toBe('')
   })
 
-  it('should filter correctly', () => {
+  it('filter buttons should filter correctly', () => {
     component.find('#completed-button').first().simulate('click')
     expect(component.find('TodoItem')).toHaveLength(1)
   })
