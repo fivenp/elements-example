@@ -14,6 +14,10 @@ Clone the project using git
 
 `git clone git@github.com:allthings/elements-example.git`
 
+then install packages with
+
+`yarn`
+
 and run it using 
 
 `yarn start`
