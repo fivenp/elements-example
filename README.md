@@ -1,21 +1,23 @@
-*This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).*
+# Elements Examples
 
-*You will find some information on how to perform common tasks [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).*
+This is a set of very basic example microapps build with [@allthings/elements](https://github.com/allthings/elements)
 
-# elements-example
+> Are you looking for elements documentation? [You can find it here](https://developers.allthings.me/elements/).
 
-This is a very simple todo example microapp build with [@allthings/elements](https://github.com/allthings/elements)
-
-> Are you looking for elements documentation? [You can find it here](https://allthings.github.io/elements/).
-
-## Running the example
+## Running the examples
 
 Clone the project using git
 
 `git clone git@github.com:allthings/elements-example.git`
 
-and run it using 
+`cd <example>` and check the README.md
 
-`yarn start`
+## Examples
 
-the app will be running on `http://localhost:3000/
+### Horizontal View
+A minimalistic example to display the user of the HorizontalRouter behaviour
+[Check it out](horizontal-view/).
+
+### ToDo-App
+A very simple ToDo Microapp
+[Check it out](todo-app/).
