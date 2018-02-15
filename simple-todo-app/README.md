@@ -10,7 +10,7 @@ Clone the project using git
 
 `git clone git@github.com:allthings/elements-example.git`
 
-`cd todo-app` and run it using
+`cd simple-todo-app` and run it using
 
 `yarn start`
 

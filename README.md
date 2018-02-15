@@ -26,10 +26,19 @@ heroku open
 
 ## Included Examples
 
+### Simple ToDo-App
+A very simple ToDo Microapp
+[Check it out](simple-todo-app/).
+
+### Extended ToDo-App
+A more complex ToDo Microapp
+[Check it out](extended-todo-app/).
+
 ### Horizontal View
-A minimalistic example to display the user of the HorizontalRouter behaviour
+A minimalistic example to showcase the HorizontalRouter behaviour
 [Check it out](horizontal-view/).
 
-### ToDo-App
-A very simple ToDo Microapp
-[Check it out](todo-app/).
+### Two Column Responsive Layout
+A minimalistic example to showcase a mix of Responsive Layouts combined with
+the HorizontalRouter behaviour.
+[Check it out](two-column-responsive-layout/).
