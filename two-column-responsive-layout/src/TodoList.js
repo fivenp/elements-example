@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { withRouter } from "react-router-dom"
 import { ColorPalette } from '@allthings/colors'
-import { Card, List, Inset, SquareIconButton, TitleBar, Text, ThemeProvider } from '@allthings/elements'
+import { Card, List, Inset, Responsive, SquareIconButton, TitleBar, Text, ThemeProvider } from '@allthings/elements'
+import View from '@allthings/react-view'
 import TodoListItem from './TodoListItem'
 
 class TodoList extends Component {
@@ -36,11 +37,16 @@ class TodoList extends Component {
     return (
       <div className="TodoList">
         <TitleBar>
-          <SquareIconButton
-            icon="arrow-left-filled"
-            iconColor="white"
-            onClick={this.onBackButtonClick}
-          />
+          <Responsive mobile>
+            <SquareIconButton
+              icon="arrow-left-filled"
+              iconColor="white"
+              onClick={this.onBackButtonClick}
+            />
+          </Responsive>
+          <Responsive tablet desktop>
+            <View style={{ padding: '16px 16px 16px 0' }} />
+          </Responsive>
           <Text strong color="white">
             Todos
           </Text>

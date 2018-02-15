@@ -21,7 +21,7 @@ class TodoGroups extends Component {
         <TitleBar>
             <Inset>
               <Text strong color="white">
-                Todos
+                Todo Categories
               </Text>
             </Inset>
         </TitleBar>
