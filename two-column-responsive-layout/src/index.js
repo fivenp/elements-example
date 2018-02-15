@@ -35,12 +35,12 @@ function renderApp() {
       <ThemeProvider theme={DemoTheme}>
       <div>
         <Responsive mobile onlyRenderOnMatch>
-              <HorizontalRouter
-                routes={[
-                  { path: "/", component: ToDoGroups },
-                  { path: "/todos/:id", component: ToDoList }
-                ]}
-              />
+          <HorizontalRouter
+            routes={[
+              { path: "/", component: ToDoGroups },
+              { path: "/todos/:id", component: ToDoList }
+            ]}
+          />
         </Responsive>
         <Responsive desktop tablet onlyRenderOnMatch>
             <ColumnLayout>

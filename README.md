@@ -12,7 +12,19 @@ Clone the project using git
 
 `cd <example>` and check the README.md
 
-## Examples
+## Deployment
+
+### Heroku
+Automatically deploy an example to heroku. Keep in mind you need the Heroku CLI
+Toolbelt installed.
+
+```
+heroku create
+git subtree push --prefix <example> heroku master
+heroku open
+```
+
+## Included Examples
 
 ### Horizontal View
 A minimalistic example to display the user of the HorizontalRouter behaviour
