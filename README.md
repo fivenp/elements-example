@@ -17,22 +17,33 @@ Clone the project using git
 ### Heroku
 
 Automatically deploy an example to heroku. Keep in mind you need the Heroku CLI
-Toolbelt installed. - -`-heroku create -git subtree push --prefix <example> heroku master -heroku open -` -
+Toolbelt installed.
 
-## Included Examples -
+```
+heroku create
+git subtree push --prefix <example> heroku master
+heroku open
+```
+
+## Included Examples
 
 ### Simple ToDo-App
 
-A very simple ToDo Microapp -[Check it out](simple-todo-app/). -
+A very simple ToDo Microapp
+[Check it out](simple-todo-app/).
 
 ### Extended ToDo-App
 
-A more complex ToDo Microapp -[Check it out](extended-todo-app/). -
+A more complex ToDo Microapp
+[Check it out](extended-todo-app/).
 
 ### Horizontal View
 
-A minimalistic example to showcase the HorizontalRouter behaviour -[Check it out](horizontal-view/). -
+A minimalistic example to showcase the HorizontalRouter behaviour
+[Check it out](horizontal-view/).
 
 ### Two Column Responsive Layout
 
-A minimalistic example to showcase a mix of Responsive Layouts combined with-the HorizontalRouter behaviour. -[Check it out](two-column-responsive-layout/).
+A minimalistic example to showcase a mix of Responsive Layouts combined with
+the HorizontalRouter behaviour.
+[Check it out](two-column-responsive-layout/).
